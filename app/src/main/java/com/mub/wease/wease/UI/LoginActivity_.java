@@ -1,25 +1,33 @@
 package com.mub.wease.wease.UI;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 // Importing Google GMS Auth API Libraries.
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.LoggingBehavior;
+import com.facebook.Profile;
+import com.facebook.login.BuildConfig;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -34,10 +42,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.mub.wease.wease.R;
+
+//FCBK
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by Andymub on 16/01/2018.
@@ -68,12 +86,74 @@ public class LoginActivity_  extends AppCompatActivity  {
     // TextView to Show Login User Email and Name.
     TextView LoginUserName, LoginUserEmail;
 
+    LoginButton loginButton;
+    CallbackManager callbackManager;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //initialize Facebook SDK
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
         setContentView(R.layout.activity_login);
+//fcbk
+        // Check if user is signed in (non-null) and update UI accordingly.
+       // FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
+
+
+
+        loginButton = findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        callbackManager = CallbackManager.Factory.create();
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+                Log.d("mylog", "Successful: " + loginResult.getAccessToken());
+                Log.d("mylog", "User ID: " + Profile.getCurrentProfile().getId());
+                Log.d("mylog", "User Profile Pic Link: " + Profile.getCurrentProfile().getProfilePictureUri(500, 500));
+                startActivity(new Intent(LoginActivity_.this,MyPDFListActivity.class));
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+                Log.d("mylog", "Successful: " + exception.toString());
+            }
+        });
+
+
+
+
+
+    //fcbk
+
+
+//                //MY SHA KEY
+//        try {
+//            PackageInfo info = getPackageManager().getPackageInfo("wease.mub.com", PackageManager.GET_SIGNATURES);
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+//        //SHA END
         // Set up the login form.signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
         SignOutButton= (Button) findViewById(R.id.sign_out);
@@ -131,6 +211,36 @@ public class LoginActivity_  extends AppCompatActivity  {
 
     }
 
+    //fcbk
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(LoginActivity_.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+
+    //fcbk
+
 
     // Sign In function Starts From Here.
     public void UserSignInMethod(){
@@ -158,6 +268,12 @@ public class LoginActivity_  extends AppCompatActivity  {
             }
 
         }
+        else //fcbk
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+    public void updateUI (FirebaseUser user){
+
+        //TODO GET USER data from facebook login ..
     }
 
     public void FirebaseUserAuth(GoogleSignInAccount googleSignInAccount) {
@@ -194,7 +310,7 @@ public class LoginActivity_  extends AppCompatActivity  {
                             LoginUserEmail.setText("Email =  "+ firebaseUser.getEmail().toString());
                             Toast.makeText(LoginActivity_.this,"OOOOOOOOOOOOK",Toast.LENGTH_LONG).show();
 
-
+                            startActivity(new Intent(LoginActivity_.this,MyPDFListActivity.class));
 
                         }else {
                             Toast.makeText(LoginActivity_.this,"Something Went Wrong",Toast.LENGTH_LONG).show();

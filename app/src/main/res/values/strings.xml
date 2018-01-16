@@ -17,4 +17,10 @@
     </string>
     <string name="title_activity_my_pdflist">Mes Items</string>
     <string name="add_new_pdf">Ajouter un PDF à ma collection</string>
+
+    <!--facebk strings-->
+    <string name="facebook_app_id">871582562998266</string>
+    <string name="fb_login_protocol_scheme">fb871582562998266</string>
+
+
 </resources>
