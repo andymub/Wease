@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "739787053902",
+    "firebase_url": "https://wease-w007.firebaseio.com",
+    "project_id": "wease-w007",
+    "storage_bucket": "wease-w007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739787053902:android:2883efa63d6f3487",
+        "android_client_info": {
+          "package_name": "wease.mub.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739787053902-dbdptpap3sg6ufo18pepp2elmd443vdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wease.mub.com",
+            "certificate_hash": "003c88c7295ba8c77df3be1faf296e32f2c4b5fb"
+          }
+        },
+        {
+          "client_id": "739787053902-uin1j5umnboarjo2cc7v443u4ar8m7fp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCspNP5gUjPxJPWABTTKhERdJF0zDCvUJc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739787053902-uin1j5umnboarjo2cc7v443u4ar8m7fp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
