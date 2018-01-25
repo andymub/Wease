@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import android.widget.Button;
@@ -64,6 +68,9 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity_  extends AppCompatActivity  {
     private View mProgressView;
     private FirebaseAuth mAuth;
+    public LinearLayout linearLayout;
+    private AnimationDrawable animationDrawable;
+    private ImageView imageViewWease;
 
     // TAG is for show some tag logs in LOG screen.
     public static final String TAG = "MainActivity";
@@ -100,6 +107,34 @@ public class LoginActivity_  extends AppCompatActivity  {
             FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         }
         setContentView(R.layout.activity_login);
+        imageViewWease=findViewById(R.id.imageView_login_Wease);
+
+        //TODO This one is to be deleted when app is done , right Mub ?
+        imageViewWease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentTo_myPDF= new Intent(LoginActivity_.this,Oder_Item_Activity.class);
+                startActivity(intentTo_myPDF);
+                finish();
+            }
+        });
+        //animation bckgrnd
+        getSupportActionBar().hide();
+
+        // init constraintLayout
+        linearLayout = findViewById(R.id.linearLayout_login);
+
+        // initializing animation drawable by getting background from constraint layout
+        animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+
+        // setting enter fade animation duration to 5 seconds
+        animationDrawable.setEnterFadeDuration(5000);
+
+        // setting exit fade animation duration to 2 seconds
+        animationDrawable.setExitFadeDuration(2000);
+        //end animation
+
+
 //fcbk
         // Check if user is signed in (non-null) and update UI accordingly.
        // FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -346,6 +381,25 @@ public class LoginActivity_  extends AppCompatActivity  {
 
         // After logout setting up login button visibility to visible.
         signInButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (animationDrawable != null && !animationDrawable.isRunning()) {
+            // start the animation
+            animationDrawable.start();
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (animationDrawable != null && animationDrawable.isRunning()) {
+            // stop the animation
+            animationDrawable.stop();
+        }
     }
 
 }

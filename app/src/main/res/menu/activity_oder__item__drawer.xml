@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mes_modules"
+            android:icon="@drawable/ic_folder_open_black_24dp"
+            android:title="Mes Modules" />
+        <item
+            android:id="@+id/nav_my_backet"
+            android:icon="@drawable/ic_blacket_24dp"
+            android:title="@string/mon_panier" />
+
+    </group>
+
+    <item android:title="@string/Autre_commande">
+        <menu>
+            <item
+                android:id="@+id/nav_special_shopping"
+                android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+                android:title="@string/special_purchase" />
+
+        </menu>
+    </item>
+    <item android:title="@string/communication">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_mail_us"
+                android:icon="@drawable/ic_mail_black_24dp"
+                android:title="@string/send" />
+        </menu>
+    </item>
+
+</menu>

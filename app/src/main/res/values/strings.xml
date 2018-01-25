@@ -21,6 +21,21 @@
     <!--facebk strings-->
     <string name="facebook_app_id">871582562998266</string>
     <string name="fb_login_protocol_scheme">fb871582562998266</string>
+    <string name="title_activity_oder__item_">Oder_Item_Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="purchase_items">Modules</string>
+    <string name="send">Mail us</string>
+    <string name="special_purchase">Achat spécial</string>
+    <string name="mon_panier">Mon Panier</string>
+    <string name="communication">Communications</string>
+    <string name="Autre_commande">Commande particulière</string>
+    <string name="listes_de_modules">Liste de modules disponibles</string>
+
+    <!--facebk strings-->
 
 
 </resources>

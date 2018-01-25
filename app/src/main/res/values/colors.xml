@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#03a9f4</color>
-    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorPrimaryDark">#0288d1</color>
     <color name="colorAccent">#9E9E9E</color>
     <color name="colorLightPrimary">#B3E5FC</color>
     <color name="colorTextIcon">#FFFFFF</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorLightSecondaryText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
+    <!--here color resources for animation login bckground -->
+
+        <!-- 1st Gradient color -->
+        <color name="colorPurple_A400">#03a9f4</color>
+        <color name="colorPurple_900">#013049</color>
+        <!-- ./ 1st Gradient color -->
+
+        <!-- 2nd Gradient color -->
+        <color name="colorAmber_A400">#FFC400</color>
+        <color name="colorAmber_900">#f78b37</color>
+        <!-- ./ 2nd Gradient color -->
+
+        <!-- 3rd Gradient color -->
+        <color name="colorGreen_A400">#00E676</color>
+        <color name="colorGreen_900">#1B5E20</color>
+        <!-- ./ 3rd Gradient color -->
+
+        <!-- 4th Gradient color -->
+        <color name="colorRed_A400">#BDBDBD</color>
+        <color name="colorRed_900">#757575</color>
+        <!-- ./ 4th Gradient color -->
+
+
 </resources>
