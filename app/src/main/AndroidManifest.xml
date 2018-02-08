@@ -36,11 +36,13 @@
             android:name=".UI.MyPDFListActivity"
             android:exported="true"
             android:label="@string/title_activity_my_pdflist"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UI.Oder_Item_Activity"
+            android:name=".UI.Order_Item_Activity"
             android:label="@string/purchase_items"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UI.OptionsEPSPActivity" />
+        <activity android:name=".UI.ViewUploadsActivity"></activity>
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ public class MyPDFListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                Intent Oder_Itent;
-//                Oder_Itent = new Intent(this, Oder_Item_Activity.class);
+//                Oder_Itent = new Intent(this, Order_Item_Activity.class);
 
             }
         });

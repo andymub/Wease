@@ -1,32 +1,23 @@
 package com.mub.wease.wease.UI;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// Importing Google GMS Auth API Libraries.
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
 import com.facebook.Profile;
 import com.facebook.login.BuildConfig;
@@ -37,11 +28,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -52,14 +41,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.mub.wease.wease.R;
 
+// Importing Google GMS Auth API Libraries.
 //FCBK
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-import org.json.JSONObject;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by Andymub on 16/01/2018.
@@ -113,7 +96,8 @@ public class LoginActivity_  extends AppCompatActivity  {
         imageViewWease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentTo_myPDF= new Intent(LoginActivity_.this,Oder_Item_Activity.class);
+               // Intent intentTo_myPDF= new Intent(LoginActivity_.this,Order_Item_Activity.class);
+                Intent intentTo_myPDF= new Intent(LoginActivity_.this,OptionsEPSPActivity.class);
                 startActivity(intentTo_myPDF);
                 finish();
             }

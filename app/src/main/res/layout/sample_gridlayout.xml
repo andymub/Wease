@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
     android:padding="3dp">
 
     <ImageView
@@ -11,13 +12,94 @@
         android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:layout_below="@+id/os_images"
         android:id="@+id/os_texts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/os_images"
         android:text="This is Just Dummy Text"
         android:textAlignment="center"
-        android:textSize="18dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_item_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/os_texts"
+        android:layout_centerHorizontal="true"
+        android:hint="v4"
+        android:text="TextView"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/txt_item_annee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_item_version"
+        android:layout_alignStart="@+id/txt_item_version"
+        android:layout_below="@+id/txt_item_version"
+        android:text="TextView"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_item_annee"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="51dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/prix"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtprix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/colorGreen_A400"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/os_texts"
+        android:layout_toLeftOf="@+id/txt_item_version"
+        android:layout_toStartOf="@+id/txt_item_version"
+        android:text="Version : "
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/txt_item_annee"
+        android:layout_toStartOf="@+id/txt_item_annee"
+        android:text="Année : "
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="12sp" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOderItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -33,7 +33,14 @@
     <string name="mon_panier">Mon Panier</string>
     <string name="communication">Communications</string>
     <string name="Autre_commande">Commande particulière</string>
-    <string name="listes_de_modules">Liste de modules disponibles</string>
+    <string name="listes_de_modules">Modules disponibles</string>
+    <string name="Options_disponibles">Options Disponibles</string>
+    <string name="Math_physique">Math-Physique</string>
+    <string name="Litteraire">Littéraire</string>
+    <string name="commercial">Commercial</string>
+    <string name="pedagogie">Pedagogie</string>
+    <string name="bio_chimie">Bio-Chimie</string>
+    <string name="prix">Prix : </string>
 
     <!--facebk strings-->
 

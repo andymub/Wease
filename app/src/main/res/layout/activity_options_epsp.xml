@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mub.wease.wease.UI.OptionsEPSPActivity">
+
+    <GridView
+        android:id="@+id/customgrid_options_rdc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/os_texts_options"
+        android:numColumns="2" />
+
+    <TextView
+        android:id="@+id/os_texts_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/Options_disponibles"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+</RelativeLayout>
