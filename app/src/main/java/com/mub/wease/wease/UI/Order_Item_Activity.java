@@ -1,6 +1,9 @@
 package com.mub.wease.wease.UI;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,18 +19,36 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mub.wease.wease.Adapter.CustomAdapterOder_item;
+import com.mub.wease.wease.Data.Constants;
 import com.mub.wease.wease.Data.GridState;
+import com.mub.wease.wease.Data.Upload;
 import com.mub.wease.wease.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order_Item_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    //database reference to get uploads data
+    DatabaseReference mDatabaseReference;
+
+    StorageReference mStorageReference;
+
+    //list to store uploads data
+    List<Upload> uploadList;
+    //
     GridView gridview;
     int countG =0;
 GridState [] gridStates;
-    public static String[] osNameList = {
+    public  String[] osNameList = {
             "Module x",
             "Module y",
             "Module z",
@@ -40,7 +61,7 @@ GridState [] gridStates;
             "Module z",
             "Module i",
     };
-    public static int[] osImages = {
+    public  int[] osImages = {
             R.mipmap.ic_pdf,
             R.mipmap.ic_pdf,
             R.mipmap.ic_pdf,
@@ -52,9 +73,10 @@ GridState [] gridStates;
             R.mipmap.ic_photo,
             R.mipmap.ic_word,
             R.mipmap.ic_photo,};
-    public static String [] result_anne={"2016","2016","2014","2016","2016","2014","2016","2016","2014","2016","2016"};
-    public static String [] result_prix={"FREE","1$","FREE","1$","1$","FREE","1$","1$","FREE","FREE","1$","1$",};
-    public static String [] result_version={"V1","V3","V1","V2","V3","V1","V2","V3","V1","V1","V4","V2"};
+    public  String [] result_anne={"2016","2016","2014","2016","2016","2014","2016","2016","2014","2016","2016"};
+    public  String [] result_prix={"FREE","1$","FREE","1$","1$","FREE","1$","1$","FREE","FREE","1$","1$",};
+    public  String [] result_version={"V1","V3","V1","V2","V3","V1","V2","V3","V1","V1","V4","V2"};
+    public  String [] result_links;
     public final static String selectedOption="selectedOption";
 
     @Override
@@ -64,6 +86,54 @@ GridState [] gridStates;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intentSelectedOption =getIntent();
+        new LoardListOfItems(Order_Item_Activity.this).execute();
+        //        //frebase retreive
+//        uploadList = new ArrayList<>();
+//
+//        //getting the database reference
+//        mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+//        mStorageReference= FirebaseStorage.getInstance().getReference();
+//        int r=4;
+//        //retrieving upload data from firebase database
+//        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    String myValue = (String) postSnapshot.getValue();
+//                    String myValueKey= postSnapshot.getKey();
+//                    myValue=addTypeToLink(myValueKey,myValue);
+//                    int t=0;
+//                    //Upload upload = postSnapshot.getValue(Upload.class);
+//                    Upload upload = new Upload(myValueKey,myValue);
+//                    uploadList.add(upload);
+//                }
+//
+//                String[] uploads = new String[uploadList.size()];
+//                result_links =new String[uploadList.size()];
+//                osNameList =new String[uploadList.size()];
+//                osImages =new int[uploadList.size()];
+//                result_anne =new String[uploadList.size()];
+//                result_prix =new String[uploadList.size()];
+//                result_version =new String[uploadList.size()];
+//                for (int i = 0; i < uploads.length; i++) {
+//                    uploads[i] = uploadList.get(i).getName();
+//                    result_links[i] = uploadList.get(i).getUrl();
+//                    int u=1;
+//                    putDataInVariable(i, uploads[i],osNameList,osImages,result_anne,result_prix,result_version);
+//                }
+//
+//                //displaying it to list
+//               // ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
+//                //listView.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//        //
         final String optionSelected = intentSelectedOption.getStringExtra(selectedOption);
         TextView optionsTxtV=findViewById(R.id.os_texts_option_order_activity);
         //set optiontxt
@@ -92,8 +162,9 @@ GridState [] gridStates;
 
         //GridView
         gridview = (GridView) findViewById(R.id.customgrid);
+        // gridview.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
         gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix));
-       // gridview.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+
     }
 
     @Override
@@ -157,5 +228,109 @@ GridState [] gridStates;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public String findFileType(String s){
+        String result=s;
+        String[] output = s.split("_");
+        return output[4];
+    }
+
+    public  void putDataInVariable (int position, String fullName, String[]osNameList, int[] osoImages
+        , String[]result_anne, String[] result_prix, String[] result_version ){
+        String[] output = fullName.split("_");
+        osNameList[position]=output[0]+" "+output[1];
+        osoImages[position] = R.mipmap.ic_pdf;
+        result_anne[position]=output[2];
+        result_prix[position]="FREE";
+        result_version[position]=output[3];
+
+    }
+    public String addTypeToLink(String mkey,String mValue)
+    {
+        String type = findFileType( mkey);
+        return mValue+"."+type;
+    }
+    public class LoardListOfItems extends AsyncTask< String , Context, Void > {
+
+        private ProgressDialog progressDialog ;
+        private Context targetCtx ;
+        private boolean needToShow;
+
+        public LoardListOfItems ( Context context ) {
+            this.targetCtx = context ;
+            this.needToShow = true;
+            progressDialog = new ProgressDialog ( targetCtx ) ;
+            progressDialog.setCancelable ( false ) ;
+            progressDialog.setMessage ( "Retrieving data..." ) ;
+            progressDialog.setTitle ( "Please wait" ) ;
+            progressDialog.setIndeterminate ( true ) ;
+        }
+
+        @ Override
+        protected void onPreExecute ( ) {
+            progressDialog.show ( ) ;
+        }
+
+        @ Override
+        protected Void doInBackground ( String ... params ) {
+            // Do Your WORK here
+
+            //frebase retreive
+            uploadList = new ArrayList<>();
+
+            //getting the database reference
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+            mStorageReference= FirebaseStorage.getInstance().getReference();
+            int r=4;
+            //retrieving upload data from firebase database
+            mDatabaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        String myValue = (String) postSnapshot.getValue();
+                        String myValueKey= postSnapshot.getKey();
+                        myValue=addTypeToLink(myValueKey,myValue);
+                        int t=0;
+                        //Upload upload = postSnapshot.getValue(Upload.class);
+                        Upload upload = new Upload(myValueKey,myValue);
+                        uploadList.add(upload);
+                    }
+
+                    String[] uploads = new String[uploadList.size()];
+                    result_links =new String[uploadList.size()];
+                    osNameList =new String[uploadList.size()];
+                    osImages =new int[uploadList.size()];
+                    result_anne =new String[uploadList.size()];
+                    result_prix =new String[uploadList.size()];
+                    result_version =new String[uploadList.size()];
+                    for (int i = 0; i < uploads.length; i++) {
+                        uploads[i] = uploadList.get(i).getName();
+                        result_links[i] = uploadList.get(i).getUrl();
+                        putDataInVariable(i, uploads[i],osNameList,osImages,result_anne,result_prix,result_version);
+                    }
+                    int u=1;
+                    gridview.setAdapter(new CustomAdapterOder_item(Order_Item_Activity.this, osNameList, osImages,result_version,result_anne,result_prix));
+
+                    //displaying it to list
+                    // ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
+                    //listView.setAdapter(adapter);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //
+            return null ;
+        }
+
+        @ Override
+        protected void onPostExecute ( Void result ) {
+            if(progressDialog != null && progressDialog.isShowing()){
+                progressDialog.dismiss ( ) ;
+            }
+        }
     }
 }

@@ -69,9 +69,12 @@ int r=4;
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Object myValue =postSnapshot.getValue();
+                    String myValue = (String) postSnapshot.getValue();
+                    String myValueKey= postSnapshot.getKey();
+                    myValue=addTypeToLink(myValueKey,myValue);
                     int t=0;
-                    Upload upload = postSnapshot.getValue(Upload.class);
+                    //Upload upload = postSnapshot.getValue(Upload.class);
+                    Upload upload = new Upload(myValueKey,myValue);
                     uploadList.add(upload);
                 }
 
@@ -94,5 +97,15 @@ int r=4;
         });
     }
 
+    public String findFileType(String s){
+        String result=s;
+        String[] output = s.split("_");
+        return output[4];
+    }
+    public String addTypeToLink(String mkey,String mValue)
+    {
+        String type = findFileType( mkey);
+        return mValue+"."+type;
+    }
 
 }

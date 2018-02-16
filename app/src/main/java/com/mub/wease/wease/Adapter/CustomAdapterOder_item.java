@@ -269,4 +269,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
     {
         return  listeOfSelectedItem;
     }
+    public void notifyDataSetChanged (){
+
+    }
 }
