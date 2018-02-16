@@ -309,7 +309,7 @@ GridState [] gridStates;
                         result_links[i] = uploadList.get(i).getUrl();
                         putDataInVariable(i, uploads[i],osNameList,osImages,result_anne,result_prix,result_version);
                     }
-                    int u=1;
+                    int u=1; 
                     gridview.setAdapter(new CustomAdapterOder_item(Order_Item_Activity.this, osNameList, osImages,result_version,result_anne,result_prix));
 
                     //displaying it to list
