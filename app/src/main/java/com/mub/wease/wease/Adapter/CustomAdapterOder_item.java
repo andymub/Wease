@@ -6,7 +6,9 @@ package com.mub.wease.wease.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +20,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mub.wease.wease.Background_HeavyWork.DownloadTask;
+import com.mub.wease.wease.Connexion.CheckConnection;
 import com.mub.wease.wease.Data.GridState;
 import com.mub.wease.wease.R;
 import com.mub.wease.wease.UI.Order_Item_Activity;
+import com.mub.wease.wease.UI.WebViewDisplayActivity;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,9 +33,12 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class CustomAdapterOder_item extends BaseAdapter{
+    public final static String linkToLoad="myLink";
     String [] result;
     String [] result_anne;
     String [] result_prix;
+    String [] result_links;
+
 
     public CustomAdapterOder_item() {
     }
@@ -164,7 +172,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
          }
      };
 
-    public CustomAdapterOder_item(Order_Item_Activity order_Item_Activity, String[] osNameList, int[] osImages,String[] version,String[] Annee,String[] prix) {
+    public CustomAdapterOder_item(Order_Item_Activity order_Item_Activity, String[] osNameList, int[] osImages,String[] version,String[] Annee,String[] prix, String[] links) {
         // TODO Auto-generated constructor stub
         result=osNameList;
         context= order_Item_Activity;
@@ -172,6 +180,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
         result_anne=Annee;
         result_prix=prix;
         result_version=version;
+        result_links=links;
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -253,7 +262,31 @@ public class CustomAdapterOder_item extends BaseAdapter{
                     int f=4;
                 }
 
+                //go to a web view
+//                Intent intent_display_inWebView= new Intent(context, WebViewDisplayActivity.class);
+//                String link = ""+result_links[position];
+//                intent_display_inWebView.putExtra(linkToLoad,link);
+//                context.startActivity(intent_display_inWebView);
 
+                //lounch an internet nav
+                //Opening the upload file in browser using the upload url
+                CheckConnection checkConnection=new CheckConnection();
+                if (checkConnection.isConnectedToInternet(context))
+                { new DownloadTask(context, result_links[position],result[position]+"_"+result_anne[position]+"_"+result_version[position]);
+                    Toast.makeText(context, "Downloading ...", Toast.LENGTH_SHORT).show();
+                    //todo get url from order activity and send it to webact
+                    Intent intentOder_Item_activity= new Intent(context, WebViewDisplayActivity.class);
+                    context.startActivity(intentOder_Item_activity);
+
+                }
+
+                else
+                { Toast.makeText(context, "Oops!! There is no internet connection. Please enable internet connection and try again.", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(result_links[position]));
+                context.startActivity(intent);
+                }
             }
         });
 

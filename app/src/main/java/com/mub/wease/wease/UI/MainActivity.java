@@ -1,11 +1,12 @@
 package com.mub.wease.wease.UI;
 
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.widget.TextView;
 
 import com.mub.wease.wease.R;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_main);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -29,7 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
             }
         },splash_time_out);
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Offerings Regular.otf");
         weasetxt = findViewById(R.id.txt_wease);
+        weasetxt.setTypeface(type);
         weasetxt.setOnClickListener(this);
     }
 

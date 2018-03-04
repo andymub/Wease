@@ -43,7 +43,7 @@
 
     <include
         layout="@layout/content_oder__item_"
-        android:layout_height="match_parent" />
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

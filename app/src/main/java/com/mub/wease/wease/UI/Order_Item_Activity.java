@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -13,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,15 +81,21 @@ GridState [] gridStates;
     public  String [] result_version={"V1","V3","V1","V2","V3","V1","V2","V3","V1","V1","V4","V2"};
     public  String [] result_links;
     public final static String selectedOption="selectedOption";
-
+    public ConstraintLayout constraintOrderItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oder__item_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //get intent here
         Intent intentSelectedOption =getIntent();
+        final String optionSelected = intentSelectedOption.getStringExtra(selectedOption);
+        TextView optionsTxtV=findViewById(R.id.os_texts_option_order_activity);
+        constraintOrderItem = findViewById(R.id.constraintOrderItem);
+        changeConstrainLytBckgnd(constraintOrderItem);
         new LoardListOfItems(Order_Item_Activity.this).execute();
+        int y=5;
         //        //frebase retreive
 //        uploadList = new ArrayList<>();
 //
@@ -134,8 +143,7 @@ GridState [] gridStates;
 //            }
 //        });
 //        //
-        final String optionSelected = intentSelectedOption.getStringExtra(selectedOption);
-        TextView optionsTxtV=findViewById(R.id.os_texts_option_order_activity);
+
         //set optiontxt
         optionsTxtV.setText(optionSelected);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -161,9 +169,10 @@ GridState [] gridStates;
         navigationView.setNavigationItemSelectedListener(this);
 
         //GridView
-        gridview = (GridView) findViewById(R.id.customgrid);
+        gridview = (GridView) findViewById(R.id.customgridforItems);
         // gridview.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
-        gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix));
+        gridview.setVisibility(View.INVISIBLE);
+        gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
 
     }
 
@@ -232,14 +241,14 @@ GridState [] gridStates;
     public String findFileType(String s){
         String result=s;
         String[] output = s.split("_");
-        return output[4];
+        return "jpg";
     }
 
     public  void putDataInVariable (int position, String fullName, String[]osNameList, int[] osoImages
         , String[]result_anne, String[] result_prix, String[] result_version ){
         String[] output = fullName.split("_");
         osNameList[position]=output[0]+" "+output[1];
-        osoImages[position] = R.mipmap.ic_pdf;
+        osoImages[position] = R.drawable.folderlogo;
         result_anne[position]=output[2];
         result_prix[position]="FREE";
         result_version[position]=output[3];
@@ -309,8 +318,9 @@ GridState [] gridStates;
                         result_links[i] = uploadList.get(i).getUrl();
                         putDataInVariable(i, uploads[i],osNameList,osImages,result_anne,result_prix,result_version);
                     }
-                    int u=1; 
-                    gridview.setAdapter(new CustomAdapterOder_item(Order_Item_Activity.this, osNameList, osImages,result_version,result_anne,result_prix));
+                    int u=1;
+                    gridview.setVisibility(View.VISIBLE);
+                    gridview.setAdapter(new CustomAdapterOder_item(Order_Item_Activity.this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
 
                     //displaying it to list
                     // ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
@@ -333,4 +343,22 @@ GridState [] gridStates;
             }
         }
     }
+
+    public void changeConstrainLytBckgnd (ConstraintLayout contLyt)
+    {
+        int currentVersion = Build.VERSION.SDK_INT;
+        if (currentVersion < Build.VERSION_CODES.M)//dded in API level 23/- 6-Marshmallow!
+        {
+
+                contLyt.setBackgroundResource(0);
+            Log.i("Bckgnd", "- Marshmallow! " );
+
+        }
+        else {
+            contLyt.setBackgroundResource(R.drawable.grid_background);
+            Log.i("Bckgnd", "+ Marshmallow! " );
+
+        }
+    }
+
 }

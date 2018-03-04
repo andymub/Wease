@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintOrderItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -9,16 +10,15 @@
     tools:showIn="@layout/app_bar_oder__item_">
 
     <GridView
-        android:id="@+id/customgrid"
+        android:id="@+id/customgridforItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/os_texts"
-        android:layout_marginTop="8dp"
         android:listSelector="@drawable/grid_view_item_selected"
-        android:numColumns="3"
+        android:numColumns="2"
         android:scrollbars="vertical"
         android:scrollingCache="false"
         android:smoothScrollbar="true"
-         />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="8dp" />
 
 </android.support.constraint.ConstraintLayout>
