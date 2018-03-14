@@ -19,6 +19,10 @@ public class Upload {
         this.name = fullName;
         this.url = url;
     }
+    public Upload(String fullName)
+    {
+        this.name = fullName;
+    }
 
     public String getName() {
         return name;

@@ -1,7 +1,10 @@
 package com.mub.wease.wease.UI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -91,6 +94,9 @@ public class LoginActivity_  extends AppCompatActivity  {
         }
         setContentView(R.layout.activity_login);
         imageViewWease=findViewById(R.id.imageView_login_Wease);
+
+        // Manually checking internet connection
+        boolean connc =isConnected();
 
         //TODO This one is to be deleted when app is done , right Mub ?
         imageViewWease.setOnClickListener(new View.OnClickListener() {
@@ -212,8 +218,10 @@ public class LoginActivity_  extends AppCompatActivity  {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                UserSignInMethod();
+                // Manually checking internet connection
+                if (isConnected()){
+                    UserSignInMethod();
+                };
 
             }
         });
@@ -223,11 +231,56 @@ public class LoginActivity_  extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                UserSignOutFunction();
+
+                if (isConnected()){
+                    UserSignOutFunction();
+                };
 
             }
         });
 
+    }
+    //check connection
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        showSnack(connected);
+        return connected;
+    }
+
+    // Showing the status in Snackbar
+    private int showSnack(boolean isConnected) {
+        String message;
+        int conn=0;
+        if (isConnected) {
+            message = "Good! Connected to Internet";
+            conn=0;
+
+        } else {
+            message = "Sorry! Not connected to internet";
+            Toast.makeText(getApplicationContext(),""+R.string.noconnection,Toast.LENGTH_SHORT).show();
+            conn=1;
+        }
+
+      return  conn;
+    }
+
+    //end check conn
+
+
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed(); commented this line in order to disable back press
+        //Write your code here
+       // Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
     }
 
     //fcbk
@@ -299,7 +352,7 @@ public class LoginActivity_  extends AppCompatActivity  {
 
         AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
 
-        Toast.makeText(LoginActivity_.this,""+ authCredential.getProvider(),Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity_.this,"Welcome",Toast.LENGTH_SHORT).show();
 
         firebaseAuth.signInWithCredential(authCredential)
                 .addOnCompleteListener(LoginActivity_.this, new OnCompleteListener() {
@@ -318,18 +371,24 @@ public class LoginActivity_  extends AppCompatActivity  {
                             // Hiding Login in button.
                             signInButton.setVisibility(View.GONE);
 
+
                             // Showing the TextView.
-                            LoginUserEmail.setVisibility(View.VISIBLE);
+                            LoginUserEmail.setVisibility(View.INVISIBLE);
                             LoginUserName.setVisibility(View.VISIBLE);
 
                             // Setting up name into TextView.
-                            LoginUserName.setText("NAME =  "+ firebaseUser.getDisplayName().toString());
+                            LoginUserName.setText("Hi! "+ firebaseUser.getDisplayName().toString());
 
                             // Setting up Email into TextView.
                             LoginUserEmail.setText("Email =  "+ firebaseUser.getEmail().toString());
-                            Toast.makeText(LoginActivity_.this,"OOOOOOOOOOOOK",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(LoginActivity_.this,"OOOOOOOOOOOOK",Toast.LENGTH_LONG).show();
 
-                            startActivity(new Intent(LoginActivity_.this,MyPDFListActivity.class));
+                           // startActivity(new Intent(LoginActivity_.this,OptionsEPSPActivity.class));
+                            String [] userN= new String[]{LoginUserName.getText().toString(),LoginUserEmail.getText().toString()};
+
+                            Intent activityOptionsEpsPIntent = new Intent(getApplicationContext(), OptionsEPSPActivity.class);
+                            activityOptionsEpsPIntent.putExtra("Id_User",userN);
+                            startActivity(activityOptionsEpsPIntent);
 
                         }else {
                             Toast.makeText(LoginActivity_.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
@@ -374,6 +433,8 @@ public class LoginActivity_  extends AppCompatActivity  {
             // start the animation
             animationDrawable.start();
         }
+        // register connection status listener
+//        MyApplication.getInstance().setConnectivityListener(this);
 
     }
 
@@ -385,5 +446,6 @@ public class LoginActivity_  extends AppCompatActivity  {
             animationDrawable.stop();
         }
     }
+
 
 }

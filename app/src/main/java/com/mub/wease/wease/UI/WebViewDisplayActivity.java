@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mub.wease.wease.Adapter.RecyclerViewAdapter_web;
+import com.mub.wease.wease.Data.Constants;
 import com.mub.wease.wease.Data.Upload;
 import com.mub.wease.wease.R;
 
@@ -35,6 +36,8 @@ public class WebViewDisplayActivity extends AppCompatActivity {
     // Creating List of ImageUploadInfo class.
     List<Upload> list = new ArrayList<>();
 
+    //count fullname receiver
+    int i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +55,17 @@ public class WebViewDisplayActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(WebViewDisplayActivity.this);
 
         // Setting up message in Progress dialog.
-        progressDialog.setMessage("Loading Images From Firebase.");
+        progressDialog.setMessage("Loading File-.");
 
         // Showing progress dialog.
         progressDialog.show();
 
         // Setting up Firebase image upload folder path in databaseReference.
         // The path is already defined in MainActivity.
-        databaseReference = FirebaseDatabase.getInstance().getReference("CULTURE");
+        String name=Constants.getDatabaseFileName();
+        int h=0;
+        databaseReference = FirebaseDatabase.getInstance().getReference(Constants.getDatabasePathUploads()+"/"+Constants.getDatabaseFileName());
+        //databaseReference = FirebaseDatabase.getInstance().getReference(Constants.getDatabasePathUploads()+"/Culture_Générale_2010_V1");
 
         // Adding Add Value Event Listener to databaseReference.
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -70,12 +76,20 @@ public class WebViewDisplayActivity extends AppCompatActivity {
 
                     //Upload imageUploadInfo = postSnapshot.getValue(Upload.class);
                     String data= postSnapshot.getValue().toString();
-                    int u=5;
-                    Upload imageUploadInfo = postSnapshot.getValue(Upload.class);
+                    String datakey= postSnapshot.getKey();
+                    datakey=EraseUnderScareInFullName(datakey);
+                    if (i<1){}
+                    else
+                    {
+                        datakey=" ";
+                    }
+                    //Upload imageUploadInfo = postSnapshot.getValue(Upload.class);
+                    Upload imageUploadInfo = new Upload(datakey,data);
 
                     list.add(imageUploadInfo);
+                    i++;
                 }
-
+                int u=5;
                 adapter = new RecyclerViewAdapter_web(getApplicationContext(), list);
 
                 recyclerView.setAdapter(adapter);
@@ -93,5 +107,10 @@ public class WebViewDisplayActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String EraseUnderScareInFullName(String datakey) {
+        String[] name= datakey.split("_");
+        return  name[0]+" "+name[1]+" "+name[3]+"/"+name[2];
     }
 }

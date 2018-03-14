@@ -4,10 +4,7 @@
     <color name="colorPrimaryDark">#0288d1</color>
     <color name="colorAccent">#9E9E9E</color>
     <color name="colorLightPrimary">#B3E5FC</color>
-    <color name="colorTextIcon">#FFFFFF</color>
     <color name="colorPrimaryText">#212121</color>
-    <color name="colorLightSecondaryText">#757575</color>
-    <color name="colorDivider">#BDBDBD</color>
     <!--here color resources for animation login bckground -->
 
         <!-- 1st Gradient color -->

@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.mub.wease.wease.Adapter.CustomAdapterOptions;
 import com.mub.wease.wease.R;
 
@@ -42,15 +44,33 @@ public class OptionsEPSPActivity extends AppCompatActivity {
            ;
     public String[] res;
     public int introwView;
+    public TextView userName,userEmail;
+    // Firebase Auth Object.
+    public FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options_epsp);
+        FirebaseAuth Auth =FirebaseAuth.getInstance();
+        userName=findViewById(R.id.txtuser_name);
+        userEmail=findViewById(R.id.txtuser_email);
         gridview = (GridView) findViewById(R.id.customgrid_options_rdc);
         gridview.setAdapter(new CustomAdapterOptions(this, osNameList_options, osImages_options));
        // rowView=gridview.setAdapter(new CustomAdapterOptions(this, osNameList_options, osImages_options).getView());
        // rowView = findViewById(R.layout.sample_gridlayout_options);
+        if(getIntent().getStringArrayExtra("Id_User") != null) {
+            String []user =getIntent().getStringArrayExtra("Id_User");
+          //  String[] nom= user[0].split("!");
+            String[] eMail= user[1].split("=");
 
+            userName.setText(user[0]);
+            userEmail.setText(eMail[1]);
+        }
+        else
+        {
+            userName.setText("wease");
+            userEmail.setText("WeaseEmail");
+        }
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 

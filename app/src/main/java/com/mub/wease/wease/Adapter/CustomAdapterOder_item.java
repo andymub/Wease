@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.mub.wease.wease.Background_HeavyWork.DownloadTask;
 import com.mub.wease.wease.Connexion.CheckConnection;
+import com.mub.wease.wease.Data.Constants;
 import com.mub.wease.wease.Data.GridState;
 import com.mub.wease.wease.R;
 import com.mub.wease.wease.UI.Order_Item_Activity;
@@ -38,6 +39,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
     String [] result_anne;
     String [] result_prix;
     String [] result_links;
+    String typeExam;
 
 
     public CustomAdapterOder_item() {
@@ -178,6 +180,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
         context= order_Item_Activity;
         imageId=osImages;
         result_anne=Annee;
+       // typeExam=item_exam_type;
         result_prix=prix;
         result_version=version;
         result_links=links;
@@ -244,7 +247,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Downloading "+result[position]+"...", Toast.LENGTH_SHORT).show();
 
               //  else { v.setBackgroundColor(GRAY);}
                 if (holder.chbxOderItem.isChecked()){
@@ -273,10 +276,13 @@ public class CustomAdapterOder_item extends BaseAdapter{
                 CheckConnection checkConnection=new CheckConnection();
                 if (checkConnection.isConnectedToInternet(context))
                 { new DownloadTask(context, result_links[position],result[position]+"_"+result_anne[position]+"_"+result_version[position]);
-                    Toast.makeText(context, "Downloading ...", Toast.LENGTH_SHORT).show();
+                    //Culture_Générale_2010_V1
+                    String[] addUnderScre=result[position].split(" ");
+                    Constants.setDatabaseFileName(addUnderScre[0]+"_"+addUnderScre[1]+"_"+result_anne[position]+"_"+result_version[position]);
                     //todo get url from order activity and send it to webact
                     Intent intentOder_Item_activity= new Intent(context, WebViewDisplayActivity.class);
                     context.startActivity(intentOder_Item_activity);
+                    Toast.makeText(context, "This may take a few seconds ...", Toast.LENGTH_SHORT).show();
 
                 }
 

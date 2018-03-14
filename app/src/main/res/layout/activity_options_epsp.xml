@@ -22,4 +22,36 @@
         android:text="@string/Options_disponibles"
         android:textAlignment="center"
         android:textSize="25dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_google_signin_btn_text_light_pressed">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtuser_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/txtuser_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

@@ -1,27 +1,13 @@
 <resources>
     <string name="app_name">Wease</string>
-    <string name="title_activity_list_of_my_pdf">ListOfMyPdfActivity</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_my_pdflist">Mes Items</string>
     <string name="add_new_pdf">Ajouter un PDF à ma collection</string>
 
     <!--facebk strings-->
     <string name="facebook_app_id">871582562998266</string>
-    <string name="fb_login_protocol_scheme">fb871582562998266</string>
-    <string name="title_activity_oder__item_">Oder_Item_Activity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -35,13 +21,9 @@
     <string name="Autre_commande">Commande particulière</string>
     <string name="listes_de_modules">Modules disponibles</string>
     <string name="Options_disponibles">Options Disponibles</string>
-    <string name="Math_physique">Math-Physique</string>
-    <string name="Litteraire">Littéraire</string>
-    <string name="commercial">Commercial</string>
-    <string name="pedagogie">Pedagogie</string>
-    <string name="bio_chimie">Bio-Chimie</string>
     <string name="prix">Prix : </string>
     <string name="wease">wease</string>
+    <string name="noconnection">vérifier votre connection internet</string>
 
     <!--facebk strings-->
 

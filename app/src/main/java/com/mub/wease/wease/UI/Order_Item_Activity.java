@@ -48,6 +48,7 @@ public class Order_Item_Activity extends AppCompatActivity
     //list to store uploads data
     List<Upload> uploadList;
     //
+
     GridView gridview;
     int countG =0;
 GridState [] gridStates;
@@ -65,17 +66,17 @@ GridState [] gridStates;
             "Module i",
     };
     public  int[] osImages = {
-            R.mipmap.ic_pdf,
-            R.mipmap.ic_pdf,
-            R.mipmap.ic_pdf,
-            R.mipmap.ic_photo,
-            R.mipmap.ic_word,
-            R.mipmap.ic_photo,
-            R.mipmap.ic_word,
-            R.mipmap.ic_word,
-            R.mipmap.ic_photo,
-            R.mipmap.ic_word,
-            R.mipmap.ic_photo,};
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,
+            R.mipmap.ic_folderlogo1,};
     public  String [] result_anne={"2016","2016","2014","2016","2016","2014","2016","2016","2014","2016","2016"};
     public  String [] result_prix={"FREE","1$","FREE","1$","1$","FREE","1$","1$","FREE","FREE","1$","1$",};
     public  String [] result_version={"V1","V3","V1","V2","V3","V1","V2","V3","V1","V1","V4","V2"};
@@ -146,6 +147,8 @@ GridState [] gridStates;
 
         //set optiontxt
         optionsTxtV.setText(optionSelected);
+        Constants.setNameOfExam(optionSelected);
+        Constants.setDatabasePathUploads("CULTURE"); //Todo se exam type over here
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,7 +251,7 @@ GridState [] gridStates;
         , String[]result_anne, String[] result_prix, String[] result_version ){
         String[] output = fullName.split("_");
         osNameList[position]=output[0]+" "+output[1];
-        osoImages[position] = R.drawable.folderlogo;
+        osoImages[position] = R.mipmap.ic_folderlogo1;
         result_anne[position]=output[2];
         result_prix[position]="FREE";
         result_version[position]=output[3];
@@ -288,7 +291,7 @@ GridState [] gridStates;
             uploadList = new ArrayList<>();
 
             //getting the database reference
-            mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.getDatabasePathUploads());
             mStorageReference= FirebaseStorage.getInstance().getReference();
             int r=4;
             //retrieving upload data from firebase database
@@ -297,12 +300,13 @@ GridState [] gridStates;
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        String myValue = (String) postSnapshot.getValue();
+                       // String myValue = (String) postSnapshot.getValue();
                         String myValueKey= postSnapshot.getKey();
-                        myValue=addTypeToLink(myValueKey,myValue);
+                        //myValue=addTypeToLink(myValueKey,myValue);
                         int t=0;
                         //Upload upload = postSnapshot.getValue(Upload.class);
-                        Upload upload = new Upload(myValueKey,myValue);
+                       // Upload upload = new Upload(myValueKey,myValue);
+                        Upload upload = new Upload(myValueKey);
                         uploadList.add(upload);
                     }
 
@@ -347,7 +351,7 @@ GridState [] gridStates;
     public void changeConstrainLytBckgnd (ConstraintLayout contLyt)
     {
         int currentVersion = Build.VERSION.SDK_INT;
-        if (currentVersion < Build.VERSION_CODES.M)//dded in API level 23/- 6-Marshmallow!
+        if (currentVersion <= Build.VERSION_CODES.M)//dded in API level 23/- 6-Marshmallow!
         {
 
                 contLyt.setBackgroundResource(0);

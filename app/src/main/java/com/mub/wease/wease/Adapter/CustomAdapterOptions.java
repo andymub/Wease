@@ -13,11 +13,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mub.wease.wease.R;
-import com.mub.wease.wease.UI.Order_Item_Activity;
 import com.mub.wease.wease.UI.OptionsEPSPActivity;
+import com.mub.wease.wease.UI.Order_Item_Activity;
 
 public class CustomAdapterOptions extends BaseAdapter{
 
@@ -25,6 +24,7 @@ public class CustomAdapterOptions extends BaseAdapter{
     String [] result;
     Context context;
     int [] imageId;
+    String type_Exam;
     int pos;
     private static LayoutInflater inflater=null;
     public CustomAdapterOptions(OptionsEPSPActivity optionsEPSPActivity, String[] osNameList, int[] osImages) {
@@ -83,7 +83,7 @@ public class CustomAdapterOptions extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
                 Intent intentOder_Item_activity= new Intent(context, Order_Item_Activity.class);
                 String option = ""+result[position];
                 intentOder_Item_activity.putExtra(selectedOption,option);
