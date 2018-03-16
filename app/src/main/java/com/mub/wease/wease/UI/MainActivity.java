@@ -47,5 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent intentLogin =new Intent(getApplicationContext(),LoginActivity_.class);
+        startActivity(intentLogin);
+    }
 
 }

@@ -22,7 +22,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
-import com.facebook.Profile;
 import com.facebook.login.BuildConfig;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -133,7 +132,8 @@ public class LoginActivity_  extends AppCompatActivity  {
 
 
         loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+       // loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -141,8 +141,9 @@ public class LoginActivity_  extends AppCompatActivity  {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Log.d("mylog", "Successful: " + loginResult.getAccessToken());
-                Log.d("mylog", "User ID: " + Profile.getCurrentProfile().getId());
-                Log.d("mylog", "User Profile Pic Link: " + Profile.getCurrentProfile().getProfilePictureUri(500, 500));
+               // String s= Profile.getCurrentProfile().getFirstName();
+                //Log.d("mylog", "User ID: " + Profile.getCurrentProfile().getId());
+               // Log.d("mylog", "User Profile Pic Link: " + Profile.getCurrentProfile().getProfilePictureUri(500, 500));
                 startActivity(new Intent(LoginActivity_.this,MyPDFListActivity.class));
             }
 
@@ -346,6 +347,8 @@ public class LoginActivity_  extends AppCompatActivity  {
     public void updateUI (FirebaseUser user){
 
         //TODO GET USER data from facebook login ..
+        String name =user.getDisplayName();
+        String Email = user.getEmail();
     }
 
     public void FirebaseUserAuth(GoogleSignInAccount googleSignInAccount) {

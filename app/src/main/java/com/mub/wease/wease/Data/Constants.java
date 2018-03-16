@@ -6,7 +6,7 @@ package com.mub.wease.wease.Data;
 
 public class Constants {
     public static String nameOfExam = "uploads/";
-    public static String DATABASE_PATH_UPLOADS = "c";//CULTURE";
+    public static String DATABASE_PATH_UPLOADS = "CULTURE";//CULTURE";
     public static String DATABASE_FILE_NAME = "c";//CULTURE";
 
     public static String getDatabaseFileName() {

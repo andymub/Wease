@@ -24,6 +24,12 @@
     <string name="prix">Prix : </string>
     <string name="wease">wease</string>
     <string name="noconnection">vérifier votre connection internet</string>
+    <string name="Math">Maths</string>
+    <string name="Phys">Physique</string>
+    <string name="biologie">Biologie</string>
+    <string name="Chimie">Chimie</string>
+    <string name="wease_email">weaserdc@gmail.com</string>
+    <string name="wease_slogan">Se former, c\'est avancer.</string>
 
     <!--facebk strings-->
 

@@ -8,6 +8,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.mub.wease.wease.UI.Order_Item_Activity"
     tools:showIn="@layout/app_bar_oder__item_">
+    <android.support.v4.widget.SwipeRefreshLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/swipeContainer"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
 
     <GridView
         android:id="@+id/customgridforItems"
@@ -20,5 +29,6 @@
         android:smoothScrollbar="true"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="8dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,8 @@ public class Order_Item_Activity extends AppCompatActivity
     GridView gridview;
     int countG =0;
 GridState [] gridStates;
+    public TextView optionsTxtV;
+    public Menu groupeMath;
     public  String[] osNameList = {
             "Module x",
             "Module y",
@@ -83,6 +86,7 @@ GridState [] gridStates;
     public  String [] result_links;
     public final static String selectedOption="selectedOption";
     public ConstraintLayout constraintOrderItem;
+    private SwipeRefreshLayout swipeContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,75 +95,69 @@ GridState [] gridStates;
         setSupportActionBar(toolbar);
         //get intent here
         Intent intentSelectedOption =getIntent();
-        final String optionSelected = intentSelectedOption.getStringExtra(selectedOption);
-        TextView optionsTxtV=findViewById(R.id.os_texts_option_order_activity);
+        String optionSelected = intentSelectedOption.getStringExtra(selectedOption);
+        optionsTxtV=findViewById(R.id.os_texts_option_order_activity);
         constraintOrderItem = findViewById(R.id.constraintOrderItem);
+
         changeConstrainLytBckgnd(constraintOrderItem);
         new LoardListOfItems(Order_Item_Activity.this).execute();
         int y=5;
-        //        //frebase retreive
-//        uploadList = new ArrayList<>();
-//
-//        //getting the database reference
-//        mDatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
-//        mStorageReference= FirebaseStorage.getInstance().getReference();
-//        int r=4;
-//        //retrieving upload data from firebase database
-//        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//                    String myValue = (String) postSnapshot.getValue();
-//                    String myValueKey= postSnapshot.getKey();
-//                    myValue=addTypeToLink(myValueKey,myValue);
-//                    int t=0;
-//                    //Upload upload = postSnapshot.getValue(Upload.class);
-//                    Upload upload = new Upload(myValueKey,myValue);
-//                    uploadList.add(upload);
-//                }
-//
-//                String[] uploads = new String[uploadList.size()];
-//                result_links =new String[uploadList.size()];
-//                osNameList =new String[uploadList.size()];
-//                osImages =new int[uploadList.size()];
-//                result_anne =new String[uploadList.size()];
-//                result_prix =new String[uploadList.size()];
-//                result_version =new String[uploadList.size()];
-//                for (int i = 0; i < uploads.length; i++) {
-//                    uploads[i] = uploadList.get(i).getName();
-//                    result_links[i] = uploadList.get(i).getUrl();
-//                    int u=1;
-//                    putDataInVariable(i, uploads[i],osNameList,osImages,result_anne,result_prix,result_version);
-//                }
-//
-//                //displaying it to list
-//               // ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uploads);
-//                //listView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//        //
+
+        // Lookup the swipe container view
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        // Setup refresh listener which triggers new data loading
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+
+            public void onRefresh() {
+
+                // Your code to refresh the list here.
+
+                // Make sure you call swipeContainer.setRefreshing(false)
+
+                // once the network request has completed successfully.
+
+                fetchTimelineAsync(0);
+
+            }
+
+        });
+
+        // Configure the refreshing colors
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+
+                android.R.color.holo_green_light,
+
+                android.R.color.holo_orange_light,
+
+                android.R.color.holo_red_light);
 
         //set optiontxt
         optionsTxtV.setText(optionSelected);
+
+
+
+        //
         Constants.setNameOfExam(optionSelected);
-        Constants.setDatabasePathUploads("CULTURE"); //Todo se exam type over here
+        Constants.setDatabasePathUploads(Constants.getDatabasePathUploads()); //Todo se exam type over here
+       // Constants.setDatabasePathUploads("CULTURE"); //Todo se exam type over here
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Snackbar.make(view, "Vous Avez X Module(s) dans votre panier d'achat-Prix de x $ ", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Ces Modules sont gratuits ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
             }
         });
 
+        int h=4;
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -192,7 +190,30 @@ GridState [] gridStates;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.oder__item_, menu);
+
+        String g=optionsTxtV.getText().toString();
+        String gf="Math-Physique";
+        //set menu
+        Boolean s="Math-Physique".trim().equals(Constants.getNameOfExam().trim());
+        if (s)
+        {
+            int h=4;
+            getMenuInflater().inflate(R.menu.oder_item_math , menu);
+            // groupeMath.setGroupVisible(R.id.groupeMath,true);
+        }
+        else if("Bio-Chimie".trim().equals(Constants.getNameOfExam().trim())){
+            getMenuInflater().inflate(R.menu.oder_item_biochimie , menu);
+        }
+        else
+        {
+            int h=4;
+            getMenuInflater().inflate(R.menu.oder__item_ , menu);
+            //groupeMath.setGroupVisible(R.id.Gmath,false);
+        }
+
+
+            int t =10;
+
         return true;
     }
 
@@ -208,7 +229,17 @@ GridState [] gridStates;
             CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
             List<String> getSelectedItemch = customAdapterOder_item.getSelectedItem();
             int y=0;
-            return true;
+
+        }
+        if (id == R.id.action_math) {
+            Constants.setDatabasePathUploads("Math".trim());
+            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+            String option = optionsTxtV.getText().toString().trim();
+            intentOder_Item_activity.putExtra(selectedOption,option);
+            startActivity(intentOder_Item_activity);
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -226,14 +257,11 @@ GridState [] gridStates;
 
         } else if (id == R.id.nav_special_shopping) {
 
-        }  else if (id == R.id.nav_share) {
-            Intent intent= new Intent(getApplicationContext(),ViewUploadsActivity.class);
-            startActivity(intent);
-
-
-        } else if (id == R.id.nav_my_backet) {
+        }  else if (id == R.id.nav_my_backet) {
 
         } else if (id == R.id.nav_mail_us) {
+            Intent intentSendMail =new Intent(getApplicationContext(),SendMailActivity.class);
+            startActivity(intentSendMail);
 
         }
 
@@ -363,6 +391,17 @@ GridState [] gridStates;
             Log.i("Bckgnd", "+ Marshmallow! " );
 
         }
+    }
+    public void fetchTimelineAsync(int page) {
+
+        // Send the network request to fetch the updated data
+        Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+        String option = optionsTxtV.getText().toString().trim();
+        intentOder_Item_activity.putExtra(selectedOption,option);
+        swipeContainer.setRefreshing(false);
+        startActivity(intentOder_Item_activity);
+
+
     }
 
 }

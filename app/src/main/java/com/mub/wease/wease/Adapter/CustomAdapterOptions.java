@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mub.wease.wease.Data.Constants;
 import com.mub.wease.wease.R;
 import com.mub.wease.wease.UI.OptionsEPSPActivity;
 import com.mub.wease.wease.UI.Order_Item_Activity;
@@ -83,6 +84,7 @@ public class CustomAdapterOptions extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                Constants.setDatabasePathUploads("CULTURE");
                // Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
                 Intent intentOder_Item_activity= new Intent(context, Order_Item_Activity.class);
                 String option = ""+result[position];
