@@ -18,10 +18,10 @@ public class SendMailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_mail);buttonSend = (Button) findViewById(R.id.buttonSend);
-        textTo = (EditText) findViewById(R.id.editTextTo);
-        textSubject = (EditText) findViewById(R.id.editTextSubject);
-        textMessage = (EditText) findViewById(R.id.editTextMessage);
+        setContentView(R.layout.activity_send_mail);buttonSend = findViewById(R.id.buttonSend);
+        textTo = findViewById(R.id.editTextTo);
+        textSubject = findViewById(R.id.editTextSubject);
+        textMessage = findViewById(R.id.editTextMessage);
 
         buttonSend.setOnClickListener(new View.OnClickListener() {
 

@@ -3,8 +3,6 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="title_activity_my_pdflist">Mes Items</string>
-    <string name="add_new_pdf">Ajouter un PDF à ma collection</string>
 
     <!--facebk strings-->
     <string name="facebook_app_id">871582562998266</string>
@@ -16,7 +14,7 @@
     <string name="purchase_items">Modules</string>
     <string name="send">Mail us</string>
     <string name="special_purchase">Achat spécial</string>
-    <string name="mon_panier">Mon Panier</string>
+    <string name="mon_panier">Mes Options</string>
     <string name="communication">Communications</string>
     <string name="Autre_commande">Commande particulière</string>
     <string name="listes_de_modules">Modules disponibles</string>
@@ -25,13 +23,33 @@
     <string name="wease">wease</string>
     <string name="noconnection">vérifier votre connection internet</string>
     <string name="Math">Maths</string>
-    <string name="Phys">Physique</string>
-    <string name="biologie">Biologie</string>
-    <string name="Chimie">Chimie</string>
+    <string name="cult">Culture Général</string>
+    <string name="CoursOption">Cours d\'option</string>
+    <string name="Sciences">Sciences</string>
+    <string name="Langue">Langue</string>
     <string name="wease_email">weaserdc@gmail.com</string>
     <string name="wease_slogan">Se former, c\'est avancer.</string>
 
     <!--facebk strings-->
+
+    <!--onboarding -->
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Wease out of a failure!</string>
+    <string name="slide_1_desc">Prepare for your upcoming exams!</string>
+
+    <string name="slide_2_title">Move forward</string>
+    <string name="slide_2_desc">your determination defines your results!</string>
+
+    <string name="slide_3_title">Great courage</string>
+    <string name="slide_3_desc">Don\'t stop until you\'re proud!</string>
+    <string name="logo_app">logo Application</string>
+    <string name="Click_Here_To_Sign_Out">Click Here To Sign Out</string>
+    <string name="Mes_Modules">Mes Modules</string>
+    <string name="backToExitt">Appuyez encore sur Retour pour quitter</string>
+    <string name="default_notification_channel_id">40</string>
 
 
 </resources>

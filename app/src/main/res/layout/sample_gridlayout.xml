@@ -9,7 +9,8 @@
         android:id="@+id/os_images"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/logo_app" />
 
     <TextView
         android:id="@+id/os_texts"
@@ -57,7 +58,8 @@
             android:gravity="end"
             android:text="@string/prix"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/txtprix"

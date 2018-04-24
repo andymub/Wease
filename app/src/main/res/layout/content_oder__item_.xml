@@ -8,6 +8,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.mub.wease.wease.UI.Order_Item_Activity"
     tools:showIn="@layout/app_bar_oder__item_">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0.1dp"
+        android:layout_marginEnd="0.1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeContainer"
+        app:layout_constraintEnd_toEndOf="@+id/swipeContainer"
+        app:srcCompat="@drawable/ss"
+        android:contentDescription="@string/logo_app"
+        android:layout_marginRight="0.1dp" />
+
     <android.support.v4.widget.SwipeRefreshLayout
 
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,17 +31,21 @@
 
         android:layout_height="match_parent">
 
-    <GridView
-        android:id="@+id/customgridforItems"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:listSelector="@drawable/grid_view_item_selected"
-        android:numColumns="2"
-        android:scrollbars="vertical"
-        android:scrollingCache="false"
-        android:smoothScrollbar="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="8dp" />
+        <GridView
+            android:id="@+id/customgridforItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTintMode="screen"
+            android:hapticFeedbackEnabled="false"
+            android:listSelector="@drawable/grid_view_item_selected"
+            android:numColumns="2"
+            android:scrollbars="vertical"
+            android:scrollingCache="false"
+            android:smoothScrollbar="true"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="8dp" >
+
+        </GridView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

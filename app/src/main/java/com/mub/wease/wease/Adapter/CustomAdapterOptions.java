@@ -72,8 +72,8 @@ public class CustomAdapterOptions extends BaseAdapter{
         View rowView;
 
         rowView = inflater.inflate(R.layout.sample_gridlayout_options, null);
-        holder.os_text =(TextView) rowView.findViewById(R.id.os_texts_options);
-        holder.os_img =(ImageView) rowView.findViewById(R.id.os_images_options);
+        holder.os_text = rowView.findViewById(R.id.os_texts_options);
+        holder.os_img = rowView.findViewById(R.id.os_images_options);
 
         holder.os_text.setText(result[position]);
         holder.os_img.setImageResource(imageId[position]);

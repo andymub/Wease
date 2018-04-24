@@ -21,6 +21,7 @@ import java.util.List;
 
 public class WebViewDisplayActivity extends AppCompatActivity {
 
+
     // Creating DatabaseReference.
     DatabaseReference databaseReference;
 
@@ -43,7 +44,7 @@ public class WebViewDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view_display);
 // Assign id to RecyclerView.
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         // Setting RecyclerView size true.
         recyclerView.setHasFixedSize(true);
@@ -78,7 +79,9 @@ public class WebViewDisplayActivity extends AppCompatActivity {
                     String data= postSnapshot.getValue().toString();
                     String datakey= postSnapshot.getKey();
                     datakey=EraseUnderScareInFullName(datakey);
-                    if (i<1){}
+                    if (i<1){
+                        //Todo do not delete this .... /8\
+                    }
                     else
                     {
                         datakey=" ";

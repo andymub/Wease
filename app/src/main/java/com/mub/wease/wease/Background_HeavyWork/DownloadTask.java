@@ -130,7 +130,7 @@ public class DownloadTask {
                 InputStream is = c.getInputStream();//Get InputStream for connection
 
                 byte[] buffer = new byte[1024];//Set buffer type
-                int len1 = 0;//init length
+                int len1;//init length
                 while ((len1 = is.read(buffer)) != -1) {
                     fos.write(buffer, 0, len1);//Write new file
                 }

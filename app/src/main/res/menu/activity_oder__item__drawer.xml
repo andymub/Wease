@@ -7,9 +7,9 @@
         <item
             android:id="@+id/mes_modules"
             android:icon="@drawable/ic_folder_open_black_24dp"
-            android:title="Mes Modules" />
+            android:title="@string/Mes_Modules" />
         <item
-            android:id="@+id/nav_my_backet"
+            android:id="@+id/nav_my_options"
             android:icon="@drawable/ic_blacket_24dp"
             android:title="@string/mon_panier" />
 

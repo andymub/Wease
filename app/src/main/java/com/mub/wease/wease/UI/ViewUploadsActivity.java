@@ -41,7 +41,7 @@ public class ViewUploadsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_uploads);
 
         uploadList = new ArrayList<>();
-        listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
 
 
         //adding a clicklistener on listview
@@ -98,7 +98,6 @@ int r=4;
     }
 
     public String findFileType(String s){
-        String result=s;
         String[] output = s.split("_");
         return output[4];
     }

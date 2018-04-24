@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -91,7 +92,7 @@ GridState [] gridStates;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oder__item_);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //get intent here
         Intent intentSelectedOption =getIntent();
@@ -105,7 +106,7 @@ GridState [] gridStates;
 
         // Lookup the swipe container view
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer = findViewById(R.id.swipeContainer);
 
         // Setup refresh listener which triggers new data loading
 
@@ -144,9 +145,10 @@ GridState [] gridStates;
 
         //
         Constants.setNameOfExam(optionSelected);
-        Constants.setDatabasePathUploads(Constants.getDatabasePathUploads()); //Todo se exam type over here
+       Constants.setDatabasePathUploads(Constants.getDatabasePathUploads()); //Todo se exam type over here
+       // Constants.setDatabasePathUploads("Bio-Chimie"); //Todo se exam type over here
        // Constants.setDatabasePathUploads("CULTURE"); //Todo se exam type over here
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,17 +162,17 @@ GridState [] gridStates;
         int h=4;
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //GridView
-        gridview = (GridView) findViewById(R.id.customgridforItems);
+        gridview = findViewById(R.id.customgridforItems);
         // gridview.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
         gridview.setVisibility(View.INVISIBLE);
         gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
@@ -179,12 +181,14 @@ GridState [] gridStates;
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+        Intent intentBackToOptionESPS =new Intent(getApplicationContext(),OptionsEPSPActivity.class);
+        startActivity(intentBackToOptionESPS);
     }
 
     @Override
@@ -203,6 +207,17 @@ GridState [] gridStates;
         }
         else if("Bio-Chimie".trim().equals(Constants.getNameOfExam().trim())){
             getMenuInflater().inflate(R.menu.oder_item_biochimie , menu);
+        }
+        else if("Littéraire".trim().equals(Constants.getNameOfExam().trim())){
+            getMenuInflater().inflate(R.menu.oder_item_litteraire , menu);
+        }
+        else if("Commerciale".trim().equals(Constants.getNameOfExam().trim())){
+            getMenuInflater().inflate(R.menu.oder_item_commercial , menu);
+        }
+        else if("Pedagogie".trim().equals(Constants.getNameOfExam().trim())){
+            getMenuInflater().inflate(R.menu.oder_item_pedagogie , menu);
+        }else if("Sociale".trim().equals(Constants.getNameOfExam().trim())){
+            getMenuInflater().inflate(R.menu.oder_item_sociale, menu);
         }
         else
         {
@@ -241,23 +256,75 @@ GridState [] gridStates;
             startActivity(intentOder_Item_activity);
 
         }
+        else if(id == R.id.action_mathphys_sciences) {
+
+        }else if(id == R.id.action_mathphys_culture) {
+            Constants.setDatabasePathUploads("CULTURE".trim());
+            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+            String option = optionsTxtV.getText().toString().trim();
+            intentOder_Item_activity.putExtra(selectedOption,option);
+            startActivity(intentOder_Item_activity);
+
+        }else if(id == R.id.action_mathphys_Langue) {
+            languageMenuForAllItem();
+
+        }else if(id == R.id.action_bio_chimie_Langue) {
+            languageMenuForAllItem();
+
+        }else if(id == R.id.action_pada_Langue) {
+            languageMenuForAllItem();
+
+        }else if(id == R.id.action_sociale_Langue) {
+            languageMenuForAllItem();
+
+        }else if(id == R.id.action_bio_chimie_cours_options) {
+            Constants.setDatabasePathUploads("Bio-Chimie".trim());
+            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+            String option = optionsTxtV.getText().toString().trim();
+            intentOder_Item_activity.putExtra(selectedOption,option);
+            startActivity(intentOder_Item_activity);
+
+        }else if(id == R.id.action_bio_chimie_math) {
+            Constants.setDatabasePathUploads("BioChimieMath".trim());
+            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+            String option = optionsTxtV.getText().toString().trim();
+            intentOder_Item_activity.putExtra(selectedOption,option);
+            startActivity(intentOder_Item_activity);
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void languageMenuForAllItem (){
+        Constants.setDatabasePathUploads("langue".trim());
+        CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+        //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+        Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+        String option = optionsTxtV.getText().toString().trim();
+        intentOder_Item_activity.putExtra(selectedOption,option);
+        startActivity(intentOder_Item_activity);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.mes_modules) {
-            Intent MyPdfIntent = new Intent(this,MyPDFListActivity.class);
+//            Intent MyPdfIntent = new Intent(this,Order_Item_Activity.class);
+//            startActivities(new Intent[]{MyPdfIntent});
+
+        }  else if (id == R.id.nav_my_options) {
+            Intent MyPdfIntent = new Intent(this,OptionsEPSPActivity.class);
             startActivities(new Intent[]{MyPdfIntent});
-
-        } else if (id == R.id.nav_special_shopping) {
-
-        }  else if (id == R.id.nav_my_backet) {
 
         } else if (id == R.id.nav_mail_us) {
             Intent intentSendMail =new Intent(getApplicationContext(),SendMailActivity.class);
@@ -265,12 +332,11 @@ GridState [] gridStates;
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
     public String findFileType(String s){
-        String result=s;
         String[] output = s.split("_");
         return "jpg";
     }
@@ -403,5 +469,6 @@ GridState [] gridStates;
 
 
     }
+
 
 }

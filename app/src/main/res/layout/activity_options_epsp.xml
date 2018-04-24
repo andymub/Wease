@@ -6,11 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.mub.wease.wease.UI.OptionsEPSPActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/studends"
+        android:contentDescription="@string/logo_app" />
+
     <GridView
         android:id="@+id/customgrid_options_rdc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/os_texts_options"
+        android:choiceMode="singleChoice"
+        android:clickable="true"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:contextClickable="true"
         android:numColumns="2" />
 
     <TextView
@@ -27,21 +42,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/common_google_signin_btn_text_light_pressed">
+        android:background="@color/common_google_signin_btn_text_light_pressed"
+        android:id="@+id/relativeLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
 
             <TextView
                 android:id="@+id/txtuser_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@color/cardview_light_background"
+                android:text="_"
+                android:textColor="@color/ic_launcher_background"
                 android:textSize="10sp" />
 
             <TextView
@@ -49,9 +66,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@color/cardview_light_background"
+                android:text="_"
+                android:textColor="@color/ic_launcher_background"
                 android:textSize="10sp" />
         </LinearLayout>
     </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2935537081813551/7412810841"></com.google.android.gms.ads.AdView>
+
 </RelativeLayout>

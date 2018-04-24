@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+@SuppressWarnings("StatementWithEmptyBody")
 public class CustomAdapterOder_item extends BaseAdapter{
     public final static String linkToLoad="myLink";
     String [] result;
@@ -223,12 +224,9 @@ public class CustomAdapterOder_item extends BaseAdapter{
         final Holder holder=new Holder();
         final View rowView;
         ColorStateList color=null;
-        if (convertView== null){
-
-        }
         rowView = inflater.inflate(R.layout.sample_gridlayout, null);
-        holder.os_text =(TextView) rowView.findViewById(R.id.os_texts);
-        holder.os_img =(ImageView) rowView.findViewById(R.id.os_images);
+        holder.os_text = rowView.findViewById(R.id.os_texts);
+        holder.os_img = rowView.findViewById(R.id.os_images);
         holder.txt_Version = rowView.findViewById(R.id.txt_item_version);
         holder.txt_annee = rowView.findViewById(R.id.txt_item_annee);
         holder.txt_prix = rowView.findViewById(R.id.txtprix);
@@ -239,7 +237,7 @@ public class CustomAdapterOder_item extends BaseAdapter{
         holder.txt_prix.setText(result_prix[position]);
         holder.txt_Version.setText(result_version[position]);
         holder.os_img.setImageResource(imageId[position]);
-        color=holder.os_text.getTextColors();
+
 
         rowView.setOnClickListener(new OnClickListener() {
 
@@ -273,8 +271,9 @@ public class CustomAdapterOder_item extends BaseAdapter{
 
                 //lounch an internet nav
                 //Opening the upload file in browser using the upload url
-                CheckConnection checkConnection=new CheckConnection();
-                if (checkConnection.isConnectedToInternet(context))
+                //CheckConnection checkConnection=new CheckConnection();
+                if (CheckConnection.isConnectedToInternet(context))
+//                if (checkConnection.isConnectedToInternet(context))
                 { new DownloadTask(context, result_links[position],result[position]+"_"+result_anne[position]+"_"+result_version[position]);
                     //Culture_Générale_2010_V1
                     String[] addUnderScre=result[position].split(" ");

@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -56,6 +57,7 @@ public class LoginActivity_  extends AppCompatActivity  {
     public LinearLayout linearLayout;
     private AnimationDrawable animationDrawable;
     private ImageView imageViewWease;
+    private Boolean exit = false;
 
     // TAG is for show some tag logs in LOG screen.
     public static final String TAG = "MainActivity";
@@ -64,7 +66,7 @@ public class LoginActivity_  extends AppCompatActivity  {
     public static final int RequestSignInCode = 7;
 
     // Firebase Auth Object.
-    public FirebaseAuth firebaseAuth;
+   // public FirebaseAuth firebaseAuth;
 
     // Google API Client object.
     public GoogleApiClient googleApiClient;
@@ -81,6 +83,8 @@ public class LoginActivity_  extends AppCompatActivity  {
     LoginButton loginButton;
     CallbackManager callbackManager;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListner;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -93,6 +97,7 @@ public class LoginActivity_  extends AppCompatActivity  {
         }
         setContentView(R.layout.activity_login);
         imageViewWease=findViewById(R.id.imageView_login_Wease);
+
 
         // Manually checking internet connection
         boolean connc =isConnected();
@@ -139,12 +144,14 @@ public class LoginActivity_  extends AppCompatActivity  {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
+                handleFacebookAccessToken(loginResult.getAccessToken());
                 // App code
                 Log.d("mylog", "Successful: " + loginResult.getAccessToken());
                // String s= Profile.getCurrentProfile().getFirstName();
                 //Log.d("mylog", "User ID: " + Profile.getCurrentProfile().getId());
                // Log.d("mylog", "User Profile Pic Link: " + Profile.getCurrentProfile().getProfilePictureUri(500, 500));
-                startActivity(new Intent(LoginActivity_.this,MyPDFListActivity.class));
+                startActivity(new Intent(LoginActivity_.this,OptionsEPSPActivity.class));
             }
 
             @Override
@@ -182,13 +189,13 @@ public class LoginActivity_  extends AppCompatActivity  {
 //        //SHA END
         // Set up the login form.signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
-        SignOutButton= (Button) findViewById(R.id.sign_out);
+        SignOutButton= findViewById(R.id.sign_out);
 
-        LoginUserName = (TextView) findViewById(R.id.textViewName);
+        LoginUserName = findViewById(R.id.textViewName);
 
-        LoginUserEmail = (TextView) findViewById(R.id.textViewEmail);
+        LoginUserEmail = findViewById(R.id.textViewEmail);
 
-        signInButton = (com.google.android.gms.common.SignInButton)findViewById(R.id.sign_in_button);
+        signInButton = findViewById(R.id.sign_in_button);
 
         // Getting Firebase Auth Instance into firebaseAuth object.
         firebaseAuth = FirebaseAuth.getInstance();
@@ -222,7 +229,7 @@ public class LoginActivity_  extends AppCompatActivity  {
                 // Manually checking internet connection
                 if (isConnected()){
                     UserSignInMethod();
-                };
+                }
 
             }
         });
@@ -235,10 +242,24 @@ public class LoginActivity_  extends AppCompatActivity  {
 
                 if (isConnected()){
                     UserSignOutFunction();
-                };
+                }
 
             }
         });
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListner = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                int i=4;
+                if(user != null){
+                    String userId = user.getUid();
+                    String userEmail = user.getEmail();
+                    goMainScreen();
+                }
+            }
+        };
 
     }
     //check connection
@@ -258,14 +279,11 @@ public class LoginActivity_  extends AppCompatActivity  {
 
     // Showing the status in Snackbar
     private int showSnack(boolean isConnected) {
-        String message;
-        int conn=0;
+        int conn;
         if (isConnected) {
-            message = "Good! Connected to Internet";
             conn=0;
 
         } else {
-            message = "Sorry! Not connected to internet";
             Toast.makeText(getApplicationContext(),""+R.string.noconnection,Toast.LENGTH_SHORT).show();
             conn=1;
         }
@@ -277,43 +295,29 @@ public class LoginActivity_  extends AppCompatActivity  {
 
 
 
-    @Override
-    public void onBackPressed() {
-        // super.onBackPressed(); commented this line in order to disable back press
-        //Write your code here
-       // Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
-    }
-
     //fcbk
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(!task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"firebase_error_login", Toast.LENGTH_LONG).show();
+                }
+                //
+                if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity_.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity_.this, "Hey !",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
-
-                        // ...
-                    }
-                });
+                //
+            }
+        });
     }
-
-
-    //fcbk
-
 
     // Sign In function Starts From Here.
     public void UserSignInMethod(){
@@ -323,6 +327,7 @@ public class LoginActivity_  extends AppCompatActivity  {
 
         startActivityForResult(AuthIntent, RequestSignInCode);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -342,15 +347,17 @@ public class LoginActivity_  extends AppCompatActivity  {
 
         }
         else //fcbk
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+        {
+            callbackManager.onActivityResult(requestCode,resultCode,data);
+        }
     }
+
     public void updateUI (FirebaseUser user){
 
         //TODO GET USER data from facebook login ..
         String name =user.getDisplayName();
         String Email = user.getEmail();
     }
-
     public void FirebaseUserAuth(GoogleSignInAccount googleSignInAccount) {
 
         AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
@@ -430,7 +437,14 @@ public class LoginActivity_  extends AppCompatActivity  {
     }
 
     @Override
+    protected void onDestroy() {
+        // This method should be called in the parent Activity's onPause() method.
+        super.onDestroy();
+    }
+
+    @Override
     protected void onResume() {
+
         super.onResume();
         if (animationDrawable != null && !animationDrawable.isRunning()) {
             // start the animation
@@ -442,7 +456,19 @@ public class LoginActivity_  extends AppCompatActivity  {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        //firebaseAuth.addAuthStateListener(firebaseAuthListner);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(firebaseAuthListner);
+    }
+
+    @Override
     protected void onPause() {
+        // This method should be called in the parent Activity's onPause() method.
         super.onPause();
         if (animationDrawable != null && animationDrawable.isRunning()) {
             // stop the animation
@@ -451,4 +477,59 @@ public class LoginActivity_  extends AppCompatActivity  {
     }
 
 
+    public void goMainScreen(){
+        Intent intent = new Intent(this, LoginActivity_.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    //fcbk
+    //    }
+//                });
+//                    }
+//                        // ...
+//
+//                        }
+//                            updateUI(null);
+//                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity_.this, "Authentication failed.",
+//                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                            // If sign in fails, display a message to the user.
+//                        } else {
+//                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity_.this, "eyhhhhhhhhhhhhhh",
+//                            updateUI(user);
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            Log.d(TAG, "signInWithCredential:success");
+//                            // Sign in success, update UI with the signed-in user's information
+//                        if (task.isSuccessful()) {
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                    @Override
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//        mAuth.signInWithCredential(credential)
+//        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+//
+//        Log.d(TAG, "handleFacebookAccessToken:" + token);
+//    private void handleFacebookAccessToken(AccessToken token) {
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed(); commented this line in order to disable back press
+        //Write your code here
+        // Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this,R.string.backToExitt,
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
+    }
 }

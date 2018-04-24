@@ -10,7 +10,7 @@
         android:id="@+id/groupeMath"
         android:visible="false">
         <item android:title="@string/Math" />
-        <item android:title="@string/Phys" />
+
     </group>
     <group
         android:id="@+id/groupeBio"

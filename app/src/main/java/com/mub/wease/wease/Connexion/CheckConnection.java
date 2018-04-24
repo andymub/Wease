@@ -17,7 +17,7 @@ public class CheckConnection {
 
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if ((connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE) != null &&
+        if (((connectivityManager != null ? connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE) : null) != null &&
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED)
                 || (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)!= null &&
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)

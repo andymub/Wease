@@ -2,14 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_biologie"
+        android:id="@+id/action_bio_chimie_cours_options"
         android:orderInCategory="100"
-        android:title="@string/biologie"
+        android:title="@string/CoursOption" />
+    <item
+        android:id="@+id/action_bio_chimie_math"
+        android:orderInCategory="100"
+        android:title="@string/Math"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_chimie"
+        android:id="@+id/action_bio_chimie_culture"
         android:orderInCategory="100"
-        android:title="@string/Chimie"
+        android:title="@string/cult"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_bio_chimie_Langue"
+        android:orderInCategory="100"
+        android:title="@string/Langue"
         app:showAsAction="never" />
 
 

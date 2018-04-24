@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sociale_cours_options"
+        android:orderInCategory="100"
+        android:title="@string/CoursOption" />
+    <item
+        android:id="@+id/action_sociale_sciences"
+        android:orderInCategory="100"
+        android:title="@string/Sciences"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sociale_culture"
+        android:orderInCategory="100"
+        android:title="@string/cult"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sociale_Langue"
+        android:orderInCategory="100"
+        android:title="@string/Langue"
+        app:showAsAction="never" />
+
+</menu>
