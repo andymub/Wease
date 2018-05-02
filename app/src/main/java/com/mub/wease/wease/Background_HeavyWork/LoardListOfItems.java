@@ -19,8 +19,8 @@ public class LoardListOfItems extends AsyncTask< String , Context, Void > {
             this.needToShow = true;
             progressDialog = new ProgressDialog ( targetCtx ) ;
             progressDialog.setCancelable ( false ) ;
-            progressDialog.setMessage ( "Retrieving data..." ) ;
-            progressDialog.setTitle ( "Please wait" ) ;
+            progressDialog.setMessage ( "Récupération des données..." ) ;
+            progressDialog.setTitle ( "Veuillez patienter " ) ;
             progressDialog.setIndeterminate ( true ) ;
         }
 

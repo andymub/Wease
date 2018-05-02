@@ -13,8 +13,8 @@
         android:layout_above="@+id/relativeLayout"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/studends"
-        android:contentDescription="@string/logo_app" />
+        android:contentDescription="@string/logo_app"
+        app:srcCompat="@drawable/studends" />
 
     <GridView
         android:id="@+id/customgrid_options_rdc"
@@ -77,9 +77,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/relativeLayout"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentStart="true"
+        android:foregroundGravity="center"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-2935537081813551/7412810841"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-2935537081813551/5061855969"></com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

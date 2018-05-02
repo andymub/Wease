@@ -17,7 +17,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -187,8 +186,12 @@ GridState [] gridStates;
 //        } else {
 //            super.onBackPressed();
 //        }
+        finish();
         Intent intentBackToOptionESPS =new Intent(getApplicationContext(),OptionsEPSPActivity.class);
         startActivity(intentBackToOptionESPS);
+
+
+
     }
 
     @Override
@@ -256,18 +259,7 @@ GridState [] gridStates;
             startActivity(intentOder_Item_activity);
 
         }
-        else if(id == R.id.action_mathphys_sciences) {
-
-        }else if(id == R.id.action_mathphys_culture) {
-            Constants.setDatabasePathUploads("CULTURE".trim());
-            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
-            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
-            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
-            String option = optionsTxtV.getText().toString().trim();
-            intentOder_Item_activity.putExtra(selectedOption,option);
-            startActivity(intentOder_Item_activity);
-
-        }else if(id == R.id.action_mathphys_Langue) {
+        else if(id == R.id.action_mathphys_Langue) {
             languageMenuForAllItem();
 
         }else if(id == R.id.action_bio_chimie_Langue) {
@@ -276,17 +268,25 @@ GridState [] gridStates;
         }else if(id == R.id.action_pada_Langue) {
             languageMenuForAllItem();
 
+        }else if(id == R.id.action_litteraire_Langue) {
+            languageMenuForAllItem();
+
+        }
+        else if(id == R.id.action_commerciale_Langue) {
+            languageMenuForAllItem();
+
         }else if(id == R.id.action_sociale_Langue) {
             languageMenuForAllItem();
 
         }else if(id == R.id.action_bio_chimie_cours_options) {
-            Constants.setDatabasePathUploads("Bio-Chimie".trim());
-            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
-            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
-            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
-            String option = optionsTxtV.getText().toString().trim();
-            intentOder_Item_activity.putExtra(selectedOption,option);
-            startActivity(intentOder_Item_activity);
+//            Constants.setDatabasePathUploads("Bio-Chimie".trim());
+//            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+//            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+//            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+//            String option = optionsTxtV.getText().toString().trim();
+//            intentOder_Item_activity.putExtra(selectedOption,option);
+//            startActivity(intentOder_Item_activity);
+            cultureMenuForAllItem();
 
         }else if(id == R.id.action_bio_chimie_math) {
             Constants.setDatabasePathUploads("BioChimieMath".trim());
@@ -297,13 +297,89 @@ GridState [] gridStates;
             intentOder_Item_activity.putExtra(selectedOption,option);
             startActivity(intentOder_Item_activity);
 
+        }else if(id == R.id.action_mathphys_culture) {
+//            Constants.setDatabasePathUploads("CULTURE".trim());
+//            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
+//            //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
+//            Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
+//            String option = optionsTxtV.getText().toString().trim();
+//            intentOder_Item_activity.putExtra(selectedOption,option);
+//            startActivity(intentOder_Item_activity);
+            cultureMenuForAllItem();
+
         }
+        else if(id == R.id.action_bio_chimie_culture) {
+            cultureMenuForAllItem();
+        }
+        else if(id == R.id.action_pada_culture) {
+            cultureMenuForAllItem();
+
+        }else if(id == R.id.action_sociale_culture) {
+            cultureMenuForAllItem();
+
+        }else if(id == R.id.action_litteraire_culture) {
+            cultureMenuForAllItem();
+
+        }else if(id == R.id.action_commerciale_culture) {
+            cultureMenuForAllItem();
+
+        }
+        else if(id == R.id.action_mathphys_sciences) {
+            //todo
+            allMenuCallForItem("MathPhys_sciences");
+
+        }
+
+        else if(id == R.id.action_sociale_cours_options) {
+            //todo
+            allMenuCallForItem("sociale_cours_options");
+        }
+        else if(id == R.id.action_sociale_sciences) {
+            //todo
+            allMenuCallForItem("sociale_sciences");
+
+        }else if(id == R.id.action_litteraire_cours_options) {
+            //todo
+            allMenuCallForItem("litteraire_cours_options");
+
+        }
+        else if(id == R.id.action_litteraire_sciences) {
+            //todo
+            allMenuCallForItem("litteraire_sciences");
+
+        }else if(id == R.id.action_commerciale_cours_options) {
+            //todo
+            allMenuCallForItem("commerciale_cours_options");
+
+        }
+        else if(id == R.id.action_commerciale_sciences) {
+            //todo
+            allMenuCallForItem("commerciale_sciences");
+
+        }else if(id == R.id.action_pada_cours_options) {
+            //todo
+            allMenuCallForItem("pada_cours_options");
+
+        }
+        else if(id == R.id.action_pada_sciences) {
+            //todo
+            allMenuCallForItem("pada_sciences");
+
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
 
     public void languageMenuForAllItem (){
-        Constants.setDatabasePathUploads("langue".trim());
+        allMenuCallForItem("langue");
+    }
+    public void cultureMenuForAllItem(){
+        allMenuCallForItem("CULTURE");
+    }
+    public void allMenuCallForItem(String NameOfFileOnServer)
+    {
+        Constants.setDatabasePathUploads(NameOfFileOnServer.trim());
         CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
         //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
         Intent intentOder_Item_activity= new Intent(this, Order_Item_Activity.class);
@@ -351,11 +427,7 @@ GridState [] gridStates;
         result_version[position]=output[3];
 
     }
-    public String addTypeToLink(String mkey,String mValue)
-    {
-        String type = findFileType( mkey);
-        return mValue+"."+type;
-    }
+
     public class LoardListOfItems extends AsyncTask< String , Context, Void > {
 
         private ProgressDialog progressDialog ;
@@ -449,12 +521,12 @@ GridState [] gridStates;
         {
 
                 contLyt.setBackgroundResource(0);
-            Log.i("Bckgnd", "- Marshmallow! " );
+//            Log.i("Bckgnd", "- Marshmallow! " );
 
         }
         else {
             contLyt.setBackgroundResource(R.drawable.grid_background);
-            Log.i("Bckgnd", "+ Marshmallow! " );
+//            Log.i("Bckgnd", "+ Marshmallow! " );
 
         }
     }
@@ -466,8 +538,6 @@ GridState [] gridStates;
         intentOder_Item_activity.putExtra(selectedOption,option);
         swipeContainer.setRefreshing(false);
         startActivity(intentOder_Item_activity);
-
-
     }
 
 

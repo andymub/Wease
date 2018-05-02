@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -37,6 +38,7 @@ public class OptionsEPSPActivity extends AppCompatActivity {
     File weaseCash;
     String dataToSend = "";
     String myData = "";
+    private Boolean exit = false;
 
 
 //
@@ -71,8 +73,16 @@ public class OptionsEPSPActivity extends AppCompatActivity {
                 "ca-app-pub-2935537081813551~2797110112");
 
         mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                // Check the LogCat to get your test device ID
+//                .addTestDevice("C04B1BFFB0774708339BC273F8A43708")
+//                .build();
+//        mAdView.loadAd(adRequest);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
 
 
         FirebaseAuth Auth =FirebaseAuth.getInstance();
@@ -83,6 +93,8 @@ public class OptionsEPSPActivity extends AppCompatActivity {
         gridview.setAdapter(new CustomAdapterOptions(this, osNameList_options, osImages_options));
        // rowView=gridview.setAdapter(new CustomAdapterOptions(this, osNameList_options, osImages_options).getView());
        // rowView = findViewById(R.layout.sample_gridlayout_options);
+
+
         if(getIntent().getStringArrayExtra("Id_User") != null) {
             String []user =getIntent().getStringArrayExtra("Id_User");
           //  String[] nom= user[0].split("!");
@@ -97,26 +109,35 @@ public class OptionsEPSPActivity extends AppCompatActivity {
             editor.putString(Name, n);
             editor.putString(Email, e);
             editor.commit();
-
-        }
-        else
-        {
-            userName.setText("wease");
-            userEmail.setText("WeaseEmail");
-        }
-        dataToSend=userName.getText().toString().trim()+"-"+userEmail.getText().toString().trim();
+            dataToSend=userName.getText().toString().trim()+"-"+userEmail.getText().toString().trim();
 
 
-        if (sharedpreferences.contains(Name)) {
-                    String d=(sharedpreferences.getString(Name, ""));String[] Nd= d.split("!");
-            userName.setText(Nd[1]);
         }
-        if (sharedpreferences.contains(Email)) {
-            String d=(sharedpreferences.getString(Email, ""));
-            String[] Nd= d.split("=");
-            userEmail.setText(Nd[1]);
+        else if (sharedpreferences.contains(Name)== false){
+//            userName.setText("wease");
+//            userEmail.setText("WeaseEmail");
+
+                Intent intentBackToLogin =new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intentBackToLogin);
+                finish();
 
         }
+        else {
+
+
+            if (sharedpreferences.contains(Name)) {
+                String d = (sharedpreferences.getString(Name, ""));
+                String[] Nd = d.split("!");
+                userName.setText(Nd[1]);
+            }
+            if (sharedpreferences.contains(Email)) {
+                String d = (sharedpreferences.getString(Email, ""));
+                String[] Nd = d.split("=");
+                userEmail.setText(Nd[1]);
+
+            }
+        }
+
 
 
 
@@ -125,7 +146,7 @@ public class OptionsEPSPActivity extends AppCompatActivity {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                introwView=introwView;
-               Log.i("DDDD",""+introwView);
+//               Log.i("DDDD",""+introwView);
 
            }
        });
@@ -170,15 +191,39 @@ public class OptionsEPSPActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
         // super.onBackPressed(); commented this line in order to disable back press
         //Write your code here
         // Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
-        sharedpreferences.edit().clear().commit();
+        if (exit) {
+            sharedpreferences.edit().clear().commit();
+            finish();
+            moveTaskToBack(true);
+        } else {
+            Toast.makeText(this,R.string.backToExitt,
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
 
-        Intent intentBackToLogin =new Intent(getApplicationContext(),LoginActivity_.class);
-        startActivity(intentBackToLogin);
+        }
+
+
+
+//        Intent intentBackToLogin =new Intent(getApplicationContext(),LoginActivity_.class);
+//        startActivity(intentBackToLogin);
+//        finish();
     }
+
 
 
 

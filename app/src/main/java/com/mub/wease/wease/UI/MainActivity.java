@@ -17,12 +17,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //variables
     TextView weasetxt;
-    private static int splash_time_out=2500;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_main);
+        int splash_time_out = 2500;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(homeIntent);
             finish();
             }
-        },splash_time_out);
+        }, splash_time_out);
         Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Offerings Regular.otf");
         weasetxt = findViewById(R.id.txt_wease);
         weasetxt.setTypeface(type);

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_pada_cours_options"
+        android:id="@+id/action_commerciale_cours_options"
         android:orderInCategory="100"
         android:title="@string/CoursOption" />
     <item
-        android:id="@+id/action_pada_sciences"
+        android:id="@+id/action_commerciale_sciences"
         android:orderInCategory="100"
         android:title="@string/Sciences"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_padae_culture"
+        android:id="@+id/action_commerciale_culture"
         android:orderInCategory="100"
         android:title="@string/cult"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_pada_Langue"
+        android:id="@+id/action_commerciale_Langue"
         android:orderInCategory="100"
         android:title="@string/Langue"
         app:showAsAction="never" />

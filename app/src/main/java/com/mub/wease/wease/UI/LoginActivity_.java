@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,7 +55,6 @@ public class LoginActivity_  extends AppCompatActivity  {
     private FirebaseAuth mAuth;
     public LinearLayout linearLayout;
     private AnimationDrawable animationDrawable;
-    private ImageView imageViewWease;
     private Boolean exit = false;
 
     // TAG is for show some tag logs in LOG screen.
@@ -96,7 +94,7 @@ public class LoginActivity_  extends AppCompatActivity  {
             FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
         }
         setContentView(R.layout.activity_login);
-        imageViewWease=findViewById(R.id.imageView_login_Wease);
+        ImageView imageViewWease = findViewById(R.id.imageView_login_Wease);
 
 
         // Manually checking internet connection
@@ -147,7 +145,7 @@ public class LoginActivity_  extends AppCompatActivity  {
 
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 // App code
-                Log.d("mylog", "Successful: " + loginResult.getAccessToken());
+//                Log.d("mylog", "Successful: " + loginResult.getAccessToken());
                // String s= Profile.getCurrentProfile().getFirstName();
                 //Log.d("mylog", "User ID: " + Profile.getCurrentProfile().getId());
                // Log.d("mylog", "User Profile Pic Link: " + Profile.getCurrentProfile().getProfilePictureUri(500, 500));
@@ -162,7 +160,7 @@ public class LoginActivity_  extends AppCompatActivity  {
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                Log.d("mylog", "Successful: " + exception.toString());
+//                Log.d("mylog", "Successful: " + exception.toString());
             }
         });
 
@@ -271,7 +269,7 @@ public class LoginActivity_  extends AppCompatActivity  {
             connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
             return connected;
         } catch (Exception e) {
-            Log.e("Connectivity Exception", e.getMessage());
+//            Log.e("Connectivity Exception", e.getMessage());
         }
         showSnack(connected);
         return connected;
@@ -518,6 +516,7 @@ public class LoginActivity_  extends AppCompatActivity  {
         // Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
         if (exit) {
             finish(); // finish activity
+
         } else {
             Toast.makeText(this,R.string.backToExitt,
                     Toast.LENGTH_SHORT).show();
@@ -531,5 +530,7 @@ public class LoginActivity_  extends AppCompatActivity  {
 
         }
 
+
     }
+
 }

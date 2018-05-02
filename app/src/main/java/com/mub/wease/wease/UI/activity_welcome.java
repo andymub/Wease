@@ -9,7 +9,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +121,7 @@ public class activity_welcome extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, OptionsEPSPActivity.class));
         finish();
     }
 
@@ -211,14 +210,14 @@ public class activity_welcome extends AppCompatActivity {
         {
 
             launchHomeScreen();
-            Log.i("API", "- API- " +Build.VERSION_CODES.CUR_DEVELOPMENT);
-            Log.i("wlcm", "- noOnBoarding! " );
+           // Log.i("API", "- API- " +Build.VERSION_CODES.CUR_DEVELOPMENT);
+           // Log.i("wlcm", "- noOnBoarding! " );
 
 
         }
         else {
-            Log.i("API", "- API- " +Build.VERSION_CODES.CUR_DEVELOPMENT);
-            Log.i("wlcm", "OnBoarding ! " );
+//            Log.i("API", "- API- " +Build.VERSION_CODES.CUR_DEVELOPMENT);
+//            Log.i("wlcm", "OnBoarding ! " );
 
         }
     }
