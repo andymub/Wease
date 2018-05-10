@@ -50,6 +50,8 @@
     <string name="Mes_Modules">Mes Modules</string>
     <string name="backToExitt">Appuyez encore sur Retour pour quitter</string>
     <string name="default_notification_channel_id">40</string>
+    <string name="share">Partagez</string>
+    <string name="deviceNotOnline">Vérifiez votre connexion</string>
 
 
 </resources>
