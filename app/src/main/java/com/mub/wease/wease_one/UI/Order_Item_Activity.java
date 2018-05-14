@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,8 +68,7 @@ GridState [] gridStates;
             "Module x XP",
             "Module y",
             "Module z",
-            "Module i",
-    };
+            "Module i",};
     public  int[] osImages = {
             R.mipmap.ic_folderlogo1,
             R.mipmap.ic_folderlogo1,
@@ -80,7 +80,8 @@ GridState [] gridStates;
             R.mipmap.ic_folderlogo1,
             R.mipmap.ic_folderlogo1,
             R.mipmap.ic_folderlogo1,
-            R.mipmap.ic_folderlogo1,};
+            R.mipmap.ic_folderlogo1,
+    };
     public  String [] result_anne={"2016","2016","2014","2016","2016","2014","2016","2016","2014","2016","2016"};
     public  String [] result_prix={"FREE","1$","FREE","1$","1$","FREE","1$","1$","FREE","FREE","1$","1$",};
     public  String [] result_version={"V1","V3","V1","V2","V3","V1","V2","V3","V1","V1","V4","V2"};
@@ -88,6 +89,7 @@ GridState [] gridStates;
     public final static String selectedOption="selectedOption";
     public ConstraintLayout constraintOrderItem;
     private SwipeRefreshLayout swipeContainer;
+    public String optionSelected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +98,7 @@ GridState [] gridStates;
         setSupportActionBar(toolbar);
         //get intent here
         Intent intentSelectedOption =getIntent();
-        String optionSelected = intentSelectedOption.getStringExtra(selectedOption);
+         optionSelected = intentSelectedOption.getStringExtra(selectedOption);
         optionsTxtV=findViewById(R.id.os_texts_option_order_activity);
         constraintOrderItem = findViewById(R.id.constraintOrderItem);
 
@@ -215,7 +217,7 @@ GridState [] gridStates;
         else if("Littéraire".trim().equals(Constants.getNameOfExam().trim())){
             getMenuInflater().inflate(R.menu.oder_item_litteraire , menu);
         }
-        else if("Commerciale".trim().equals(Constants.getNameOfExam().trim())){
+        else if("Commerciale Admi".trim().equals(Constants.getNameOfExam().trim())){
             getMenuInflater().inflate(R.menu.oder_item_commercial , menu);
         }
         else if("Pedagogie".trim().equals(Constants.getNameOfExam().trim())){
@@ -244,13 +246,357 @@ GridState [] gridStates;
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
-            List<String> getSelectedItemch = customAdapterOder_item.getSelectedItem();
-            int y=0;
+        if (id == R.id.action_culture_general_for_all) {
+
+            //CULTURE GENERAL FOR
+            //Humanité Pédagogique
+            if (optionSelected.trim().equals(("Humanité Pédagogique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Sociale
+            else if(optionSelected.trim().equals(("Sociale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction
+            else if(optionSelected.trim().equals(("Construction").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Agriculture générale
+            else if(optionSelected.trim().equals(("Agriculture générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Commerciale informatique
+            else if(optionSelected.trim().equals(("Commerciale informatique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction métallique
+            else if(optionSelected.trim().equals(("Construction métallique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Electricité
+            else if(optionSelected.trim().equals(("Electricité").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Eléctronique industrielle
+            else if(optionSelected.trim().equals(("Eléctronique industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Coupe et couture
+            else if(optionSelected.trim().equals(("Coupe et couture").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Industries agricoles
+            else if(optionSelected.trim().equals(("Industries agricoles").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Informatique de gestion
+            else if(optionSelected.trim().equals(("Informatique de gestion").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Menuiserie
+            else if(optionSelected.trim().equals(("Menuiserie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mines et géologie
+            else if(optionSelected.trim().equals(("Mines et géologie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Musique
+            else if(optionSelected.trim().equals(("Musique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Nutrition
+            else if(optionSelected.trim().equals(("Nutrition").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pêche et navigation
+            else if(optionSelected.trim().equals(("Pêche et navigation").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pétrochimie
+            else if(optionSelected.trim().equals(("Pétrochimie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Vétérinaire
+            else if(optionSelected.trim().equals(("Vétérinaire").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Chimie industrielle
+            else if(optionSelected.trim().equals(("Chimie industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
 
         }
-        if (id == R.id.action_math) {
+        else if (id == R.id.action_options_for_all) {
+            //OPTIONS FOR
+            //Humanité Pédagogique
+            if (optionSelected.trim().equals(("Humanité Pédagogique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Sociale
+            else if(optionSelected.trim().equals(("Sociale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction
+            else if(optionSelected.trim().equals(("Construction").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Agriculture générale
+            else if(optionSelected.trim().equals(("Agriculture générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Commerciale informatique
+            else if(optionSelected.trim().equals(("Commerciale informatique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction métallique
+            else if(optionSelected.trim().equals(("Construction métallique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Electricité
+            else if(optionSelected.trim().equals(("Electricité").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Eléctronique industrielle
+            else if(optionSelected.trim().equals(("Eléctronique industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Coupe et couture
+            else if(optionSelected.trim().equals(("Coupe et couture").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Industries agricoles
+            else if(optionSelected.trim().equals(("Industries agricoles").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Informatique de gestion
+            else if(optionSelected.trim().equals(("Informatique de gestion").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Menuiserie
+            else if(optionSelected.trim().equals(("Menuiserie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mines et géologie
+            else if(optionSelected.trim().equals(("Mines et géologie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Musique
+            else if(optionSelected.trim().equals(("Musique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Nutrition
+            else if(optionSelected.trim().equals(("Nutrition").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pêche et navigation
+            else if(optionSelected.trim().equals(("Pêche et navigation").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pétrochimie
+            else if(optionSelected.trim().equals(("Pétrochimie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Vétérinaire
+            else if(optionSelected.trim().equals(("Vétérinaire").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Chimie industrielle
+            else if(optionSelected.trim().equals(("Chimie industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+        }
+        else if (id == R.id.action_Sciences_for_all) {
+            //SCIENCES FOR
+            //Humanité Pédagogique
+            if (optionSelected.trim().equals(("Humanité Pédagogique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Sociale
+            else if(optionSelected.trim().equals(("Sociale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction
+            else if(optionSelected.trim().equals(("Construction").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Agriculture générale
+            else if(optionSelected.trim().equals(("Agriculture générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Commerciale informatique
+            else if(optionSelected.trim().equals(("Commerciale informatique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction métallique
+            else if(optionSelected.trim().equals(("Construction métallique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Electricité
+            else if(optionSelected.trim().equals(("Electricité").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Eléctronique industrielle
+            else if(optionSelected.trim().equals(("Eléctronique industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Coupe et couture
+            else if(optionSelected.trim().equals(("Coupe et couture").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Industries agricoles
+            else if(optionSelected.trim().equals(("Industries agricoles").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Informatique de gestion
+            else if(optionSelected.trim().equals(("Informatique de gestion").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Menuiserie
+            else if(optionSelected.trim().equals(("Menuiserie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mines et géologie
+            else if(optionSelected.trim().equals(("Mines et géologie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Musique
+            else if(optionSelected.trim().equals(("Musique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Nutrition
+            else if(optionSelected.trim().equals(("Nutrition").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pêche et navigation
+            else if(optionSelected.trim().equals(("Pêche et navigation").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pétrochimie
+            else if(optionSelected.trim().equals(("Pétrochimie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Vétérinaire
+            else if(optionSelected.trim().equals(("Vétérinaire").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Chimie industrielle
+            else if(optionSelected.trim().equals(("Chimie industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+        }
+        else if (id == R.id.action_Langues_for_all) {
+            //Langue FOR
+            //Humanité Pédagogique
+            if (optionSelected.trim().equals(("Humanité Pédagogique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Sociale
+            else if(optionSelected.trim().equals(("Sociale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction
+            else if(optionSelected.trim().equals(("Construction").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Agriculture générale
+            else if(optionSelected.trim().equals(("Agriculture générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Commerciale informatique
+            else if(optionSelected.trim().equals(("Commerciale informatique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Construction métallique
+            else if(optionSelected.trim().equals(("Construction métallique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Electricité
+            else if(optionSelected.trim().equals(("Electricité").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Eléctronique industrielle
+            else if(optionSelected.trim().equals(("Eléctronique industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Coupe et couture
+            else if(optionSelected.trim().equals(("Coupe et couture").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Industries agricoles
+            else if(optionSelected.trim().equals(("Industries agricoles").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Informatique de gestion
+            else if(optionSelected.trim().equals(("Informatique de gestion").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Menuiserie
+            else if(optionSelected.trim().equals(("Menuiserie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mécanique générale
+            else if(optionSelected.trim().equals(("Mécanique générale").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Mines et géologie
+            else if(optionSelected.trim().equals(("Mines et géologie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Musique
+            else if(optionSelected.trim().equals(("Musique").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Nutrition
+            else if(optionSelected.trim().equals(("Nutrition").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pêche et navigation
+            else if(optionSelected.trim().equals(("Pêche et navigation").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Pétrochimie
+            else if(optionSelected.trim().equals(("Pétrochimie").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Vétérinaire
+            else if(optionSelected.trim().equals(("Vétérinaire").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+            //Chimie industrielle
+            else if(optionSelected.trim().equals(("Chimie industrielle").trim())){
+                Toast.makeText(getApplicationContext(),""+optionSelected.trim(),Toast.LENGTH_SHORT ).show();
+            }
+        }
+        else if (id == R.id.action_math) {
             Constants.setDatabasePathUploads("Math".trim());
             CustomAdapterOder_item customAdapterOder_item= new CustomAdapterOder_item();
             //gridview.setAdapter(new CustomAdapterOder_item(this, osNameList, osImages,result_version,result_anne,result_prix,result_links));
@@ -322,6 +668,7 @@ GridState [] gridStates;
             cultureMenuForAllItem();
 
         }else if(id == R.id.action_commerciale_culture) {
+            Toast.makeText(getApplicationContext(),"Holla",Toast.LENGTH_SHORT ).show();
             cultureMenuForAllItem();
 
         }

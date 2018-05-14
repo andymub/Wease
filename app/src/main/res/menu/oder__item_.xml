@@ -2,9 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_culture_general_for_all"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/cult"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_options_for_all"
+        android:orderInCategory="100"
+        android:title="@string/Options"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_Sciences_for_all"
+        android:orderInCategory="100"
+        android:title="@string/Sciences"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_Langues_for_all"
+        android:orderInCategory="100"
+        android:title="@string/Langue"
         app:showAsAction="never" />
     <group
         android:id="@+id/groupeMath"

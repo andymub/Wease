@@ -7,8 +7,8 @@ android {
         applicationId "wease_one.mub.com"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 6
-        versionName "Wease 1.6"
+        versionCode 7
+        versionName "Wease 1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     //Signing configurations for build variants "release"
