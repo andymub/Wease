@@ -7,8 +7,8 @@ android {
         applicationId "wease_one.mub.com"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 7
-        versionName "Wease 1.7"
+        versionCode 8
+        versionName "Wease 1.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     //Signing configurations for build variants "release"
@@ -27,7 +27,7 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false //TODO SET TO TRUE BEFORE BUILDING A RELEASE
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -54,6 +54,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'com.android.support:support-v4:26.0.2'//PR LE REFRESH
     implementation 'com.google.firebase:firebase-messaging:11.0.4'// for notifications sms
+    compile 'uk.co.samuelwall:material-tap-target-prompt:2.0.1'//A Tap Target
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
+
 
 
 }

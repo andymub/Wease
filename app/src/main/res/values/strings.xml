@@ -55,4 +55,34 @@
     <string name="deviceNotOnline">Vérifiez votre connexion</string>
 
 
+    <!--courses strings-->
+    <string name="math_physique">Math-Physique</string>
+    <string name="Bio_Chimie">Bio-Chimie</string>
+    <string name="Litteraire">Littéraire</string>
+    <string name="Commerciale_Admi">Commerciale Admi</string>
+    <string name="Humanite_Pedagogique">Humanité Pédagogique</string>
+    <string name="Sociale">Sociale</string>
+    <string name="Construction">Construction</string>
+    <string name="Agriculture">Agriculture générale</string>
+    <string name="Commerciale_info">Commerciale informatique</string>
+    <string name="Construction_metallique">Construction métallique</string>
+    <string name="Electricite">Electricité</string>
+    <string name="Eléctronique">Eléctronique industrielle</string>
+    <string name="Coupe_et_couture">Coupe et couture</string>
+    <string name="Industries_agricoles">Industries agricoles</string>
+    <string name="Informatique_de_gestion">Informatique de gestion</string>
+    <string name="Menuiserie">Menuiserie</string>
+    <string name="Mecanique_generale">Mécanique générale</string>
+    <string name="Mecanique_machines_et_outils">Mécanique Machines et outils</string>
+    <string name="mines_et_geologie">Mines et géologie</string>
+    <string name="musique">Musique</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="peche_et_navigation">Pêche et navigation</string>
+    <string name="petrochimie">Pétrochimie</string>
+    <string name="veterinairie">Vétérinaire</string>
+    <string name="chimie_industrielle">Chimie industrielle</string>
+    <string name="appwidget_text">Options Disponibles</string>
+    <string name="add_widget">Add widget</string>
+
+
 </resources>

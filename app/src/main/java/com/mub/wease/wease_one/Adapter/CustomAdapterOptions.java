@@ -89,8 +89,10 @@ public class CustomAdapterOptions extends BaseAdapter{
                 // TODO Auto-generated method stub
                 // Check for Internet Connection
                 if (Device.isConnected()) {
+
                    // Toast.makeText(getApplicationContext(), "Internet Connected", Toast.LENGTH_SHORT).show();
-                    Constants.setDatabasePathUploads("CULTURE");
+                    // Constants.setDatabasePathUploads("CULTURE");
+                    setDatabasepathToUplaods(result[position].trim());
                     // Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_SHORT).show();
                     Intent intentOder_Item_activity= new Intent(context, Order_Item_Activity.class);
                     String option = ""+result[position];
@@ -104,5 +106,62 @@ public class CustomAdapterOptions extends BaseAdapter{
         });
 
         return rowView;
+    }
+    public void setDatabasepathToUplaods (String optionsSelected)
+    {
+        String value= getApplicationContext().getString(R.string.math_physique);
+        if(optionsSelected.equals(value.trim()) ||
+                optionsSelected.equals((getApplicationContext().getString(R.string.Bio_Chimie)).trim())||
+                optionsSelected.equals((getApplicationContext().getString(R.string.Litteraire)).trim())||
+                //optionsSelected.equals((getApplicationContext().getString(R.string.Humanite_Pedagogique)).trim())||
+                optionsSelected.equals((getApplicationContext().getString(R.string.Sociale)).trim())
+                )
+        {    Constants.setDatabasePathUploads("CULTURE");  }
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Commerciale_Admi)).trim())){
+            Constants.setDatabasePathUploads("Commerciale_culture");
+        }
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Humanite_Pedagogique)))){
+        Constants.setDatabasePathUploads("Pedagogie_culture");
+    }
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Construction)))){
+            Constants.setDatabasePathUploads("Construction_culture");
+        }
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Agriculture)))){
+            Constants.setDatabasePathUploads("Agriculture générale_culture");
+        }
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Commerciale_info)))){
+            Constants.setDatabasePathUploads("Commerciale informatique_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Construction_metallique)))){
+            Constants.setDatabasePathUploads("Construction métallique_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Electricite)))){
+            Constants.setDatabasePathUploads("Electricité_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Eléctronique)))){
+            Constants.setDatabasePathUploads("Eléctronique industrielle_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Coupe_et_couture)))){
+            Constants.setDatabasePathUploads("Coupe et couture_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Industries_agricoles)))){
+            Constants.setDatabasePathUploads("Industries agricoles_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Informatique_de_gestion)))){
+            Constants.setDatabasePathUploads("Informatique de gestion_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Menuiserie)))){
+            Constants.setDatabasePathUploads("Menuiserie_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Mecanique_generale)))){
+            Constants.setDatabasePathUploads("Mécanique générale_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.Mecanique_machines_et_outils)))){
+            Constants.setDatabasePathUploads("Mécanique machines-outils_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.mines_et_geologie)))){
+            Constants.setDatabasePathUploads("Mines et géologie_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.musique)))){
+            Constants.setDatabasePathUploads("Musique_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.nutrition)))){
+            Constants.setDatabasePathUploads("Nutrition_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.peche_et_navigation)))){
+            Constants.setDatabasePathUploads("Pêche et navigation_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.petrochimie)))){
+            Constants.setDatabasePathUploads("Pétrochimie_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.veterinairie)))){
+            Constants.setDatabasePathUploads("Vétérinaire_culture");}
+        else if (optionsSelected.equals((getApplicationContext().getString(R.string.chimie_industrielle)))){
+            Constants.setDatabasePathUploads("Chimie industrielle_culture");}
     }
 }

@@ -60,7 +60,7 @@ public class OptionsEPSPActivity extends AppCompatActivity {
         "Informatique de gestion",
         "Menuiserie",
         "Mécanique générale",
-        "Mécanique générale",
+        "Mécanique Machines et outils",
         "Mines et géologie",
         "Musique",
         "Nutrition",
